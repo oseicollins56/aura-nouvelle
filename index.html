@@ -262,6 +262,29 @@
             animation: fadeSlideUp 0.9s 0.3s forwards;
         }
 
+        .hero-brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(13px, 1.4vw, 17px);
+            font-weight: 600;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--apricot);
+            margin-bottom: 6px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s 0.1s forwards;
+        }
+
+        .hero-brand-tag {
+            font-size: clamp(9px, 0.9vw, 11px);
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s 0.2s forwards;
+        }
+
         .hero-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(54px, 7.5vw, 96px);
@@ -2603,7 +2626,6 @@
 <!-- ══════════════════ NAVBAR ══════════════════ -->
 <nav id="navbar">
     <a href="#hero" class="nav-logo">
-        <img src="logo-new.svg" alt="Aura Nouvelle Logo">
         <div>
             <span class="nav-logo-name">Aura Nouvelle</span>
             <span class="nav-logo-tag">Your Presence, Redefined.</span>
@@ -2796,6 +2818,8 @@
     </div>
 
     <div class="hero-content">
+        <p class="hero-brand-name">Aura Nouvelle</p>
+        <p class="hero-brand-tag">Your Presence, Redefined.</p>
         <h1 class="hero-title">
             Your Presence,<br><em>Redefined.</em>
         </h1>

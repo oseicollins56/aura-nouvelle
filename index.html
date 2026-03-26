@@ -188,7 +188,9 @@
             min-height: 680px;
             position: relative;
             display: flex;
-            align-items: flex-end;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
             padding-top: 80px;
         }
@@ -196,59 +198,42 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             transform: scale(1.03);
             transition: transform 8s ease;
             background: #0a0505;
         }
-        .hero-bg-left {
-            background: linear-gradient(to right, #0a0505 60%, rgba(10,5,5,0.4) 100%);
-        }
-        .hero-bg-right {
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-bg-right img {
+        .hero-bg img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center top;
             display: block;
         }
-        @media (max-width: 900px) {
-            .hero-bg {
-                grid-template-columns: 1fr;
-            }
-            .hero-bg-left { display: none; }
-            .hero-bg-right img {
-                object-fit: cover;
-                object-position: center 15%;
-            }
-        }
-
         .hero-bg.loaded { transform: scale(1); }
 
         .hero-overlay {
             position: absolute;
             inset: 0;
             background: linear-gradient(
-                to right,
-                rgba(10,5,5,0.92) 0%,
-                rgba(10,5,5,0.5) 45%,
-                rgba(10,5,5,0.08) 70%,
-                rgba(10,5,5,0) 100%
+                to bottom,
+                rgba(5,2,2,0.72) 0%,
+                rgba(5,2,2,0.45) 40%,
+                rgba(5,2,2,0.55) 70%,
+                rgba(5,2,2,0.78) 100%
             );
             z-index: 1;
         }
-        #hero .hero-content { z-index: 2; }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            padding: 70px 80px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 40px;
             color: white;
-            max-width: 680px;
         }
 
         .hero-eyebrow {
@@ -263,28 +248,29 @@
         }
 
         .hero-brand-name {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(72px, 11vw, 160px);
-            font-weight: 400;
-            letter-spacing: 2px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(52px, 9vw, 130px);
+            font-weight: 600;
+            letter-spacing: clamp(8px, 2vw, 22px);
+            text-transform: uppercase;
             color: var(--white);
-            line-height: 1.05;
-            margin-bottom: 4px;
-            text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+            line-height: 1;
+            margin-bottom: 18px;
+            text-shadow: 0 2px 40px rgba(0,0,0,0.5);
             opacity: 0;
-            animation: fadeSlideUp 0.9s 0.1s forwards;
+            animation: fadeSlideUp 1s 0.2s forwards;
         }
 
         .hero-brand-tag {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(10px, 1vw, 13px);
+            font-size: clamp(9px, 1.1vw, 12px);
             font-weight: 300;
-            letter-spacing: 4px;
+            letter-spacing: clamp(3px, 1vw, 7px);
             text-transform: uppercase;
             color: var(--apricot);
-            margin-bottom: 36px;
+            margin-bottom: 44px;
             opacity: 0;
-            animation: fadeSlideUp 0.9s 0.25s forwards;
+            animation: fadeSlideUp 1s 0.4s forwards;
         }
 
         .hero-title {
@@ -306,20 +292,22 @@
             font-size: 13px;
             font-weight: 300;
             line-height: 1.9;
-            color: rgba(255,255,255,0.8);
-            max-width: 400px;
+            color: rgba(255,255,255,0.75);
+            max-width: 480px;
             margin-bottom: 40px;
             letter-spacing: 0.3px;
+            text-align: center;
             opacity: 0;
-            animation: fadeSlideUp 0.9s 0.7s forwards;
+            animation: fadeSlideUp 0.9s 0.6s forwards;
         }
 
         .hero-actions {
             display: flex;
             gap: 14px;
             flex-wrap: wrap;
+            justify-content: center;
             opacity: 0;
-            animation: fadeSlideUp 0.9s 0.9s forwards;
+            animation: fadeSlideUp 0.9s 0.8s forwards;
         }
 
         .btn-primary {
@@ -361,7 +349,7 @@
         /* Hero badge */
         .hero-badge {
             position: absolute;
-            top: 120px;
+            bottom: 80px;
             right: 80px;
             width: 110px;
             height: 110px;
@@ -2458,7 +2446,7 @@
             .categories-grid { grid-template-columns: 1fr 1fr; }
             .faq-wrap { grid-template-columns: 1fr; gap: 0; }
             .delivery-row { grid-template-columns: 1fr; }
-            .hero-content { padding: 50px 30px; }
+            .hero-content { padding: 0 24px; }
             .hero-badge { display: none; }
             .footer-grid { grid-template-columns: 1fr; gap: 36px; }
             #editorial-strip { padding: 70px 30px; }
@@ -2466,8 +2454,8 @@
 
         @media (max-width: 640px) {
             .section, #contact, footer { padding: 60px 22px; }
-            .hero-content { padding: 40px 22px; }
-            .hero-actions { flex-direction: column; align-items: flex-start; }
+            .hero-content { padding: 0 20px; }
+            .hero-actions { flex-direction: column; align-items: center; }
             .products-grid { grid-template-columns: 1fr; }
             .categories-grid { grid-template-columns: 1fr; }
             .order-grid { grid-template-columns: 1fr; }
@@ -2794,10 +2782,7 @@
 <!-- ══════════════════ HERO ══════════════════ -->
 <section id="hero">
     <div class="hero-bg" id="heroBg">
-        <div class="hero-bg-left"></div>
-        <div class="hero-bg-right">
-            <img src="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG" alt="Aura Nouvelle">
-        </div>
+        <img src="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG" alt="Aura Nouvelle">
     </div>
     <div class="hero-overlay"></div>
 

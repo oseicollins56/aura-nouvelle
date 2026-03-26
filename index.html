@@ -264,25 +264,27 @@
 
         .hero-brand-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(13px, 1.4vw, 17px);
-            font-weight: 600;
-            letter-spacing: 6px;
+            font-size: clamp(52px, 7vw, 100px);
+            font-weight: 400;
+            letter-spacing: 10px;
             text-transform: uppercase;
-            color: var(--apricot);
-            margin-bottom: 6px;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 10px;
             opacity: 0;
-            animation: fadeSlideUp 0.8s 0.1s forwards;
+            animation: fadeSlideUp 0.9s 0.1s forwards;
         }
 
         .hero-brand-tag {
-            font-size: clamp(9px, 0.9vw, 11px);
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(10px, 1vw, 13px);
             font-weight: 300;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.55);
-            margin-bottom: 28px;
+            color: var(--apricot);
+            margin-bottom: 36px;
             opacity: 0;
-            animation: fadeSlideUp 0.8s 0.2s forwards;
+            animation: fadeSlideUp 0.9s 0.25s forwards;
         }
 
         .hero-title {
@@ -2625,13 +2627,6 @@
 
 <!-- ══════════════════ NAVBAR ══════════════════ -->
 <nav id="navbar">
-    <a href="#hero" class="nav-logo">
-        <div>
-            <span class="nav-logo-name">Aura Nouvelle</span>
-            <span class="nav-logo-tag">Your Presence, Redefined.</span>
-        </div>
-    </a>
-
     <ul class="nav-links">
         <li><a href="#collections">Collections</a></li>
         <li class="cat-nav-wrap">
@@ -2818,11 +2813,8 @@
     </div>
 
     <div class="hero-content">
-        <p class="hero-brand-name">Aura Nouvelle</p>
+        <h1 class="hero-brand-name">Aura Nouvelle</h1>
         <p class="hero-brand-tag">Your Presence, Redefined.</p>
-        <h1 class="hero-title">
-            Your Presence,<br><em>Redefined.</em>
-        </h1>
         <p class="hero-subtitle">
             Timeless ready-to-wear from Ghana. Each piece crafted with precision, balance, and refined sophistication — designed not just to be seen, but felt.
         </p>

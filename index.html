@@ -7,7 +7,7 @@
     <meta name="description" content="Aura Nouvelle — Quiet luxury ready-to-wear from Ghana. Timeless pieces crafted with precision, balance, and refined sophistication. Your Presence, Redefined.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --crimson: #B22222;
@@ -263,14 +263,14 @@
         }
 
         .hero-brand-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(52px, 7vw, 100px);
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(72px, 11vw, 160px);
             font-weight: 400;
-            letter-spacing: 10px;
-            text-transform: uppercase;
+            letter-spacing: 2px;
             color: var(--white);
-            line-height: 1;
-            margin-bottom: 10px;
+            line-height: 1.05;
+            margin-bottom: 4px;
+            text-shadow: 0 2px 24px rgba(0,0,0,0.35);
             opacity: 0;
             animation: fadeSlideUp 0.9s 0.1s forwards;
         }
@@ -2849,17 +2849,20 @@
 <section class="section" id="collections">
     <div class="col-header reveal">
         <div>
-            <span class="section-eyebrow">Featured Pieces</span>
-            <h2 class="section-title">Nostalgia <em>In Time</em></h2>
+            <span class="section-eyebrow" id="collections-eyebrow">Featured Pieces</span>
+            <h2 class="section-title" id="collections-title">Nostalgia <em>In Time</em></h2>
             <p class="desc">Each piece embodies structure and softness, restraint and confidence — a harmony of modern sophistication.</p>
         </div>
-        <a href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20see%20all%20available%20pieces." target="_blank" class="link-arrow">View All Pieces &rarr;</a>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+            <a href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20see%20all%20available%20pieces." target="_blank" class="link-arrow">View All Pieces &rarr;</a>
+            <button id="clear-filter-btn" onclick="clearCategoryFilter()" style="display:none;background:none;border:1px solid var(--crimson);color:var(--crimson);padding:6px 14px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;">✕ Clear Filter</button>
+        </div>
     </div>
 
     <div class="products-grid">
 
         <!-- ① Crimson Statement Gown — IN STOCK -->
-        <div class="product-card featured reveal reveal-delay-1" data-product="The Crimson Statement Gown">
+        <div class="product-card featured reveal reveal-delay-1" data-product="The Crimson Statement Gown" data-category="woman">
             <div class="product-img-wrap">
                 <img src="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG" alt="The Crimson Statement Gown" loading="eager">
                 <span class="product-badge">New Drop</span>
@@ -2892,7 +2895,7 @@
         </div>
 
         <!-- ② Botanical Power Co-ord — IN STOCK -->
-        <div class="product-card reveal reveal-delay-2" data-product="Botanical Power Co-ord Set">
+        <div class="product-card reveal reveal-delay-2" data-product="Botanical Power Co-ord Set" data-category="woman">
             <div class="product-img-wrap">
                 <img src="54e55dfa-d8c2-49e5-b0c4-a233a6b3a244.JPG" alt="Botanical Power Co-ord" loading="lazy">
                 <span class="product-badge">Bestseller</span>
@@ -2924,7 +2927,7 @@
         </div>
 
         <!-- ③ Noir Silhouette Midi Dress — OUT OF STOCK -->
-        <div class="product-card oos reveal reveal-delay-3" data-product="Noir Silhouette Midi Dress">
+        <div class="product-card oos reveal reveal-delay-3" data-product="Noir Silhouette Midi Dress" data-category="woman">
             <div class="product-img-wrap">
                 <img src="5578acb0-c4cb-4c1e-98c8-3faed325544e.JPG" alt="Noir Silhouette Dress" loading="lazy">
                 <span class="oos-badge">Out of Stock</span>
@@ -2956,7 +2959,7 @@
         </div>
 
         <!-- ④ Scarlet Evening Gown — IN STOCK -->
-        <div class="product-card reveal reveal-delay-2" data-product="Scarlet Evening Gown">
+        <div class="product-card reveal reveal-delay-2" data-product="Scarlet Evening Gown" data-category="woman">
             <div class="product-img-wrap">
                 <img src="6a01731e-5696-4a96-9ac6-820fdc9c74c6.JPG" alt="Scarlet Evening Gown" loading="lazy">
             </div>
@@ -2987,7 +2990,7 @@
         </div>
 
         <!-- ⑤ Red Carpet Statement Dress — OUT OF STOCK -->
-        <div class="product-card oos reveal reveal-delay-3" data-product="Red Carpet Statement Dress">
+        <div class="product-card oos reveal reveal-delay-3" data-product="Red Carpet Statement Dress" data-category="woman">
             <div class="product-img-wrap">
                 <img src="7783bb7f-84b7-4df9-9d0c-db588b7f1a5a.JPG" alt="Red Carpet Statement" loading="lazy">
                 <span class="oos-badge">Out of Stock</span>
@@ -3032,7 +3035,7 @@
     </div>
 
     <div class="categories-grid" style="grid-template-columns:repeat(3,1fr);">
-        <div class="cat-card reveal reveal-delay-1" onclick="window.open('https://wa.me/233246131857?text=I\'m interested in The Aura Man collection.','_blank')">
+        <div class="cat-card reveal reveal-delay-1" onclick="showCategory('man')" style="cursor:pointer;">
             <img src="4f302c80-d04f-4ee3-8d54-83339ddf3889.JPG" alt="The Aura Man" loading="lazy">
             <div class="cat-overlay">
                 <span class="cat-label">Menswear</span>
@@ -3040,7 +3043,7 @@
                 <span class="cat-arrow">Shop Now →</span>
             </div>
         </div>
-        <div class="cat-card reveal reveal-delay-2" onclick="window.open('https://wa.me/233246131857?text=I\'m interested in The Aura Woman collection.','_blank')">
+        <div class="cat-card reveal reveal-delay-2" onclick="showCategory('woman')" style="cursor:pointer;">
             <img src="859bf37b-5f78-41c2-a3e1-84aa4dc8dd6b.JPG" alt="The Aura Woman" loading="lazy">
             <div class="cat-overlay">
                 <span class="cat-label">Womenswear</span>
@@ -3048,7 +3051,7 @@
                 <span class="cat-arrow">Shop Now →</span>
             </div>
         </div>
-        <div class="cat-card reveal reveal-delay-3" onclick="window.open('https://wa.me/233246131857?text=I\'m interested in your Accessories.','_blank')">
+        <div class="cat-card reveal reveal-delay-3" onclick="showCategory('accessories')" style="cursor:pointer;">
             <img src="45f3f35a-1f7a-412e-9128-26cb46b681ab.JPG" alt="Accessories" loading="lazy">
             <div class="cat-overlay">
                 <span class="cat-label">Lifestyle &amp; Accessories</span>
@@ -3273,8 +3276,16 @@
             <span class="restock-field-label">WhatsApp / Email</span>
             <input type="text" class="restock-input" id="restock-contact" placeholder="Phone number or email address" autocomplete="email">
 
-            <button class="restock-submit" onclick="submitRestock()">Send Restock Request via WhatsApp</button>
+            <button class="restock-submit" onclick="submitRestock()">Submit Restock Request</button>
             <p class="restock-note">We'll reach out as soon as this piece is back. Thank you for your patience.</p>
+        </div>
+
+        <!-- Success state -->
+        <div id="restock-success" style="display:none;padding:48px 36px;text-align:center;">
+            <div style="font-size:40px;margin-bottom:18px;">✦</div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--crimson);margin-bottom:12px;">Request Received</h3>
+            <p style="font-size:13px;color:#555;line-height:1.8;max-width:300px;margin:0 auto 28px;">Thank you — we'll notify you at <strong id="restock-confirmed-contact"></strong> as soon as <em id="restock-confirmed-piece"></em> is back in stock.</p>
+            <button onclick="closeRestock()" style="background:var(--crimson);color:white;border:none;padding:13px 36px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;">Close</button>
         </div>
     </div>
 </div>
@@ -3826,6 +3837,16 @@
     function closeRestock() {
         document.getElementById('restock-overlay').classList.remove('open');
         document.body.style.overflow = '';
+        // Reset screens for next open
+        setTimeout(() => {
+            const body = document.querySelector('.restock-body');
+            const success = document.getElementById('restock-success');
+            if (body) body.style.display = '';
+            if (success) success.style.display = 'none';
+            document.getElementById('restock-name').value = '';
+            document.getElementById('restock-contact').value = '';
+            document.querySelectorAll('.restock-size-btn').forEach(b => b.classList.remove('selected'));
+        }, 300);
     }
 
     function closeRestockOnBg(e) {
@@ -3841,23 +3862,72 @@
         const name = document.getElementById('restock-name').value.trim();
         const contact = document.getElementById('restock-contact').value.trim();
         const sizeBtn = document.querySelector('.restock-size-btn.selected');
-        const size = sizeBtn ? sizeBtn.textContent.trim() : 'not specified';
 
         if (!name || !contact) {
             alert('Please fill in your name and contact details.');
             return;
         }
 
-        const msg = encodeURIComponent(
-            `Hello Aura Nouvelle! I'd like to request a restock for:\n\n` +
-            `👗 Piece: ${currentRestockProduct}\n` +
-            `📏 Size: ${size}\n` +
-            `🙋 Name: ${name}\n` +
-            `📬 Contact: ${contact}\n\n` +
-            `Please notify me when it's back in stock. Thank you!`
-        );
-        window.open(`https://wa.me/233246131857?text=${msg}`, '_blank');
-        closeRestock();
+        // Show success screen inside modal
+        document.querySelector('.restock-body').style.display = 'none';
+        document.getElementById('restock-confirmed-contact').textContent = contact;
+        document.getElementById('restock-confirmed-piece').textContent = currentRestockProduct;
+        document.getElementById('restock-success').style.display = 'block';
+    }
+
+    // ── CATEGORY FILTER ──
+    function showCategory(cat) {
+        const labels = { man: 'The Aura Man', woman: 'The Aura Woman', accessories: 'Accessories' };
+        const cards = document.querySelectorAll('.product-card');
+        const eyebrow = document.getElementById('collections-eyebrow');
+        const title = document.getElementById('collections-title');
+        const clearBtn = document.getElementById('clear-filter-btn');
+
+        let found = 0;
+        cards.forEach(card => {
+            if (card.dataset.category === cat) {
+                card.style.display = '';
+                found++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (found === 0) {
+            // No products yet — show a "coming soon" message
+            let msg = document.getElementById('cat-empty-msg');
+            if (!msg) {
+                msg = document.createElement('div');
+                msg.id = 'cat-empty-msg';
+                msg.style.cssText = 'grid-column:1/-1;text-align:center;padding:60px 20px;';
+                msg.innerHTML = `<p style="font-family:\'Cormorant Garamond\',serif;font-size:28px;font-style:italic;color:var(--crimson);margin-bottom:10px;">Coming Soon</p><p style="font-size:12px;letter-spacing:1.5px;color:#888;text-transform:uppercase;">The ${labels[cat]} collection is being curated.</p>`;
+                document.querySelector('.products-grid').appendChild(msg);
+            }
+            msg.style.display = 'block';
+        } else {
+            const msg = document.getElementById('cat-empty-msg');
+            if (msg) msg.style.display = 'none';
+        }
+
+        if (eyebrow) eyebrow.textContent = labels[cat] || 'Collections';
+        if (title) title.innerHTML = labels[cat] === 'Accessories' ? '<em>Accessories</em>' : labels[cat].replace('The ', 'The <em>') + '</em>';
+        if (clearBtn) clearBtn.style.display = 'block';
+
+        // Scroll to collections
+        document.getElementById('collections').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function clearCategoryFilter() {
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => { card.style.display = ''; });
+        const msg = document.getElementById('cat-empty-msg');
+        if (msg) msg.style.display = 'none';
+        const eyebrow = document.getElementById('collections-eyebrow');
+        const title = document.getElementById('collections-title');
+        const clearBtn = document.getElementById('clear-filter-btn');
+        if (eyebrow) eyebrow.textContent = 'Featured Pieces';
+        if (title) title.innerHTML = 'Nostalgia <em>In Time</em>';
+        if (clearBtn) clearBtn.style.display = 'none';
     }
 
     // ── POPUP LOGIC ──

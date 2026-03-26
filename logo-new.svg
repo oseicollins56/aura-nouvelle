@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <rect width="500" height="500" fill="#000000"/>
+  <!-- "an" ligature monogram using path data in serif italic style -->
+  <text
+    x="250"
+    y="275"
+    text-anchor="middle"
+    font-family="'Cormorant Garamond', Georgia, 'Times New Roman', serif"
+    font-size="210"
+    font-weight="600"
+    font-style="italic"
+    fill="#8B0000"
+  >an</text>
+  <!-- "AURA NOUVELLE" wordmark -->
+  <text
+    x="250"
+    y="360"
+    text-anchor="middle"
+    font-family="'Cormorant Garamond', Georgia, 'Times New Roman', serif"
+    font-size="34"
+    font-weight="600"
+    fill="#8B0000"
+    letter-spacing="8"
+  >AURA NOUVELLE</text>
+</svg>

@@ -2725,106 +2725,20 @@
             <span class="checkout-section-title">Payment Method</span>
             <p style="font-size:11.5px;color:var(--gray);margin-bottom:14px;line-height:1.6;">Select your preferred payment method. Payment instructions will be shown on screen after confirming your order.</p>
 
-            <!-- Mobile Money -->
-            <p style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dark);margin:0 0 8px;">📱 Mobile Money</p>
-            <div class="payment-options" style="margin-bottom:16px;">
+            <!-- Payment Options -->
+            <div class="payment-options">
                 <label class="pay-option selected" id="po-momo">
                     <input type="radio" name="payment" value="MTN Mobile Money" checked onchange="selectPayment(this.closest('.pay-option'))">
                     <div>
-                        <div class="pay-option-label">MTN Mobile Money</div>
+                        <div class="pay-option-label">📱 MTN Mobile Money</div>
                         <div class="pay-option-sub">Merchant: 0246 131 857 · Aura Nouvelle · ID: 006452</div>
                     </div>
                 </label>
-                <label class="pay-option" id="po-telecel">
-                    <input type="radio" name="payment" value="Telecel Cash (Vodafone)" onchange="selectPayment(this.closest('.pay-option'))">
-                    <div>
-                        <div class="pay-option-label">Telecel Cash (Vodafone Cash)</div>
-                        <div class="pay-option-sub">Number will be shared via WhatsApp after order</div>
-                    </div>
-                </label>
-                <label class="pay-option" id="po-airteltigo">
-                    <input type="radio" name="payment" value="AirtelTigo Money" onchange="selectPayment(this.closest('.pay-option'))">
-                    <div>
-                        <div class="pay-option-label">AirtelTigo Money</div>
-                        <div class="pay-option-sub">Number will be shared via WhatsApp after order</div>
-                    </div>
-                </label>
-            </div>
-
-            <!-- Bank Transfer -->
-            <p style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dark);margin:0 0 8px;">🏦 Bank Transfer (Ghana & International)</p>
-            <div class="payment-options" style="margin-bottom:16px;">
                 <label class="pay-option" id="po-absa">
                     <input type="radio" name="payment" value="Absa Bank" onchange="selectPayment(this.closest('.pay-option'))">
                     <div>
-                        <div class="pay-option-label">Absa Bank Ghana</div>
+                        <div class="pay-option-label">🏦 Absa Bank Ghana</div>
                         <div class="pay-option-sub">Account: 021-1402709 · Aura Nouvelle</div>
-                    </div>
-                </label>
-                <label class="pay-option" id="po-gcb">
-                    <input type="radio" name="payment" value="GCB Bank" onchange="selectPayment(this.closest('.pay-option'))">
-                    <div>
-                        <div class="pay-option-label">GCB Bank</div>
-                        <div class="pay-option-sub">Account details shared via WhatsApp after order</div>
-                    </div>
-                </label>
-                <label class="pay-option" id="po-ecobank">
-                    <input type="radio" name="payment" value="Ecobank" onchange="selectPayment(this.closest('.pay-option'))">
-                    <div>
-                        <div class="pay-option-label">Ecobank Ghana</div>
-                        <div class="pay-option-sub">Account details shared via WhatsApp after order</div>
-                    </div>
-                </label>
-                <label class="pay-option" id="po-other-bank">
-                    <input type="radio" name="payment" value="Other Bank Transfer" onchange="selectPayment(this.closest('.pay-option'))">
-                    <div>
-                        <div class="pay-option-label">Other Ghanaian Bank</div>
-                        <div class="pay-option-sub">Fidelity, Stanbic, Cal, Zenith, Standard Chartered & more — details via WhatsApp</div>
-                    </div>
-                </label>
-            </div>
-
-            <!-- International -->
-            <p style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dark);margin:0 0 8px;">🌍 International Payment</p>
-            <div class="payment-options" style="margin-bottom:16px;">
-                <label class="pay-option" id="po-wise">
-                    <input type="radio" name="payment" value="Wise (International)" onchange="selectPayment(this.closest('.pay-option'))">
-                    <div>
-                        <div class="pay-option-label">Wise (formerly TransferWise)</div>
-                        <div class="pay-option-sub">Fast, low-fee international transfer — details via WhatsApp</div>
-                    </div>
-                </label>
-                <label class="pay-option" id="po-paypal">
-                    <input type="radio" name="payment" value="PayPal (International)" onchange="selectPayment(this.closest('.pay-option'))">
-                    <div>
-                        <div class="pay-option-label">PayPal</div>
-                        <div class="pay-option-sub">PayPal address shared via WhatsApp after order</div>
-                    </div>
-                </label>
-                <label class="pay-option" id="po-applepay">
-                    <input type="radio" name="payment" value="Apple Pay / Google Pay" onchange="selectPayment(this.closest('.pay-option'))">
-                    <div>
-                        <div class="pay-option-label">Apple Pay / Google Pay</div>
-                        <div class="pay-option-sub">Available via our international payment link — shared via WhatsApp</div>
-                    </div>
-                </label>
-                <label class="pay-option" id="po-intl-bank">
-                    <input type="radio" name="payment" value="International Bank Transfer (SWIFT)" onchange="selectPayment(this.closest('.pay-option'))">
-                    <div>
-                        <div class="pay-option-label">International Bank Transfer (SWIFT)</div>
-                        <div class="pay-option-sub">SWIFT / IBAN details for international wire transfers — via WhatsApp</div>
-                    </div>
-                </label>
-            </div>
-
-            <!-- Gift Card -->
-            <p style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dark);margin:0 0 8px;">🎁 Gift Card</p>
-            <div class="payment-options">
-                <label class="pay-option" id="po-gc">
-                    <input type="radio" name="payment" value="Gift Card" onchange="selectPayment(this.closest('.pay-option'))">
-                    <div>
-                        <div class="pay-option-label">Aura Nouvelle Gift Card</div>
-                        <div class="pay-option-sub" id="gcAppliedInfo">Enter your gift card code in the cart before checkout</div>
                     </div>
                 </label>
             </div>

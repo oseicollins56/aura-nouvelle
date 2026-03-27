@@ -360,7 +360,8 @@
             width: 110px;
             height: 110px;
             border-radius: 50%;
-            object-fit: cover;
+            object-fit: contain;
+            background: #fffff0;
             z-index: 1;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             animation: spin 12s linear infinite;
@@ -2530,7 +2531,7 @@
         .im-faq-head { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; cursor: pointer; user-select: none; }
         .im-faq-q { font-size: 13.5px; font-weight: 600; letter-spacing: 0.3px; }
         .im-faq-toggle { font-size: 24px; color: var(--crimson); font-weight: 300; line-height: 1; transition: transform 0.22s; }
-        .im-faq-ans { font-size: 13px; line-height: 1.85; color: var(--gray); padding: 0 0 16px; display: none; }
+        .im-faq-ans { font-size: 13px; font-weight: 500; line-height: 1.85; color: #444; padding: 0 0 16px; display: none; }
         .im-faq-item.open .im-faq-toggle { transform: rotate(45deg); }
         .im-faq-item.open .im-faq-ans { display: block; }
         .im-reviews-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 20px; margin-top: 20px; }
@@ -3975,10 +3976,10 @@
                         ['Do you ship internationally?', 'Yes! We ship worldwide. Select "International Bank Transfer (SWIFT)" or "Wise" at checkout, and our team will contact you with specific details for your location.'],
                         ['What payment methods do you accept?', 'MTN Mobile Money (Merchant: 0246 131 857 · Aura Nouvelle · ID: 006452), Absa Bank Ghana (Account: 021-1402709 · Aura Nouvelle), Telecel Cash, AirtelTigo Money, GCB Bank, Ecobank, Wise, PayPal, Apple Pay / Google Pay, SWIFT, and Aura Nouvelle Gift Cards.'],
                         ['Can I return or exchange my order?', 'All Aura Nouvelle pieces are small-batch and limited. We do not offer returns or exchanges. Please carefully check your size using our size guide before ordering. If unsure, contact us first — we are happy to help.'],
-                        ['What if I receive a damaged item?', 'A new piece will be made and delivered in exchange for the damaged item. Alternatively, upon request, an approved refund will be processed to your original payment method within 5–10 business days.'],
+                        ['What if I receive a damaged or incorrect item?', 'Please email us within 48 hours of delivery at info.auranouvelle@gmail.com with the following:<br><br>• Order details<br>• A brief description of the issue<br>• Clear photos of the item<br><br>A new piece will be made and delivered in exchange for the damaged item. Alternatively, upon request, an approved refund will be processed to your original payment method within 5–10 business days.'],
                         ['How can I contact Aura Nouvelle?', 'Email: info.auranouvelle@gmail.com · WhatsApp: +233 246 131 857 · Instagram / Snapchat / TikTok: @auranouvelle. We respond within 24 hours on business days.'],
                         ['Do you do custom / made-to-measure pieces?', 'Yes! We offer select couture and custom-made pieces. Reach out via WhatsApp or DM with your requirements and our team will discuss your vision, timeline, and pricing.']
-                    ].map(([q,a]) => `<div class="im-faq-item"><div class="im-faq-head" onclick="this.parentElement.classList.toggle('open')"><span class="im-faq-q">${q}</span><span class="im-faq-toggle">+</span></div><p class="im-faq-ans">${a}</p></div>`).join('')}
+                    ].map(([q,a]) => `<div class="im-faq-item"><div class="im-faq-head" onclick="this.parentElement.classList.toggle('open')"><span class="im-faq-q">${q}</span><span class="im-faq-toggle">+</span></div><div class="im-faq-ans">${a}</div></div>`).join('')}
                 </div>`
         },
         'reviews': {

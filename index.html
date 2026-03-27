@@ -389,49 +389,67 @@
             from { opacity: 0; transform: translateY(20px); }
         }
 
-        /* ── HERO BRAND NAME LETTER ANIMATION ── */
-        @keyframes letterRise {
-            0%   { opacity: 0; transform: translateY(48px) scaleY(1.08); filter: blur(6px); }
-            60%  { opacity: 1; filter: blur(0); }
-            100% { opacity: 1; transform: translateY(0) scaleY(1); filter: blur(0); }
+        /* ── HERO BRAND NAME: CINEMATIC LIGHT SWEEP ── */
+
+        /* 1. The text container clips from left → right, painting letters in */
+        @keyframes textReveal {
+            0%   { clip-path: inset(0 100% 0 0); opacity: 1; }
+            100% { clip-path: inset(0 0% 0 0);   opacity: 1; }
         }
 
-        @keyframes shimmerSweep {
-            0%   { background-position: -400% center; }
-            100% { background-position: 400% center; }
+        /* 2. Light beam that races across just ahead of the reveal */
+        @keyframes beamRace {
+            0%   { left: -8%;  opacity: 0; }
+            5%   { opacity: 1; }
+            90%  { opacity: 1; }
+            100% { left: 108%; opacity: 0; }
+        }
+
+        /* 3. After reveal: slow crimson glow breathes on the title */
+        @keyframes glowBreath {
+            0%, 100% { text-shadow: 0 2px 40px rgba(0,0,0,0.4), 0 0 0px rgba(178,34,34,0); }
+            50%       { text-shadow: 0 2px 40px rgba(0,0,0,0.4), 0 0 55px rgba(178,34,34,0.45), 0 0 100px rgba(178,34,34,0.18); }
+        }
+
+        /* 4. Tagline fades up after the sweep finishes */
+        @keyframes taglineIn {
+            from { opacity: 0; transform: translateY(12px) letterSpacing(8px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .hero-brand-name {
-            /* overrides applied below */
-        }
-
-        .hero-brand-letter {
-            display: inline-block;
+            clip-path: inset(0 100% 0 0);
             opacity: 0;
-            animation: letterRise 0.75s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            animation:
+                textReveal  1.5s cubic-bezier(0.77, 0, 0.18, 1) 0.3s forwards,
+                glowBreath  3.5s ease-in-out 2.2s infinite;
         }
 
         .hero-brand-name-wrap {
-            display: block;
+            display: inline-block;
             position: relative;
-            overflow: visible;
         }
 
-        /* Shimmer sweep that runs after letters land */
-        .hero-brand-name-wrap::after {
+        /* The sweeping light beam */
+        .hero-brand-name-wrap::before {
             content: '';
             position: absolute;
-            inset: 0;
+            top: -10%;
+            left: -8%;
+            width: 8%;
+            height: 120%;
             background: linear-gradient(
-                105deg,
-                transparent 30%,
-                rgba(255,220,180,0.55) 50%,
-                transparent 70%
+                to right,
+                transparent,
+                rgba(255, 235, 200, 0.9) 40%,
+                rgba(255, 255, 255, 1) 50%,
+                rgba(255, 235, 200, 0.9) 60%,
+                transparent
             );
-            background-size: 300% 100%;
-            animation: shimmerSweep 1.4s ease 1.6s 1 forwards;
-            background-position: -400% center;
+            filter: blur(8px);
+            animation: beamRace 1.5s cubic-bezier(0.77, 0, 0.18, 1) 0.3s forwards;
             pointer-events: none;
+            z-index: 10;
         }
 
         /* ── TICKER ── */
@@ -4264,24 +4282,11 @@
         }
     });
 
-    // ── HERO BRAND NAME: letter-by-letter animation ──
+    // ── HERO BRAND NAME: wrap for beam pseudo-element ──
     (function() {
         const el = document.getElementById('heroBrandName');
         if (!el) return;
-        const text = el.textContent;
-        const baseDelay = 0.15; // seconds before first letter
-        const stagger  = 0.07; // seconds between each letter
-
-        el.innerHTML = '<span class="hero-brand-name-wrap">' +
-            text.split('').map((ch, i) => {
-                if (ch === ' ') {
-                    // Space: invisible spacer, no animation needed
-                    return '<span style="display:inline-block;width:0.35em;">&nbsp;</span>';
-                }
-                const delay = (baseDelay + i * stagger).toFixed(2);
-                return `<span class="hero-brand-letter" style="animation-delay:${delay}s">${ch}</span>`;
-            }).join('') +
-        '</span>';
+        el.innerHTML = '<span class="hero-brand-name-wrap">' + el.textContent + '</span>';
     })();
 
 </script>

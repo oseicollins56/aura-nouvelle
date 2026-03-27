@@ -253,7 +253,9 @@
             line-height: 1;
             margin-bottom: 18px;
             text-shadow: 0 2px 40px rgba(0,0,0,0.4);
-            /* opacity handled per-letter */
+            opacity: 1;
+            animation: none;
+            clip-path: none;
         }
 
         .hero-brand-tag {
@@ -389,67 +391,8 @@
             from { opacity: 0; transform: translateY(20px); }
         }
 
-        /* ── HERO BRAND NAME: CINEMATIC LIGHT SWEEP ── */
-
-        /* 1. The text container clips from left → right, painting letters in */
-        @keyframes textReveal {
-            0%   { clip-path: inset(0 100% 0 0); opacity: 1; }
-            100% { clip-path: inset(0 0% 0 0);   opacity: 1; }
-        }
-
-        /* 2. Light beam that races across just ahead of the reveal */
-        @keyframes beamRace {
-            0%   { left: -8%;  opacity: 0; }
-            5%   { opacity: 1; }
-            90%  { opacity: 1; }
-            100% { left: 108%; opacity: 0; }
-        }
-
-        /* 3. After reveal: slow crimson glow breathes on the title */
-        @keyframes glowBreath {
-            0%, 100% { text-shadow: 0 2px 40px rgba(0,0,0,0.4), 0 0 0px rgba(178,34,34,0); }
-            50%       { text-shadow: 0 2px 40px rgba(0,0,0,0.4), 0 0 55px rgba(178,34,34,0.45), 0 0 100px rgba(178,34,34,0.18); }
-        }
-
-        /* 4. Tagline fades up after the sweep finishes */
-        @keyframes taglineIn {
-            from { opacity: 0; transform: translateY(12px) letterSpacing(8px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-brand-name {
-            clip-path: inset(0 100% 0 0);
-            opacity: 0;
-            animation:
-                textReveal  1.5s cubic-bezier(0.77, 0, 0.18, 1) 0.3s forwards,
-                glowBreath  3.5s ease-in-out 2.2s infinite;
-        }
-
         .hero-brand-name-wrap {
             display: inline-block;
-            position: relative;
-        }
-
-        /* The sweeping light beam */
-        .hero-brand-name-wrap::before {
-            content: '';
-            position: absolute;
-            top: -10%;
-            left: -8%;
-            width: 8%;
-            height: 120%;
-            background: linear-gradient(
-                to right,
-                transparent,
-                rgba(255, 235, 200, 0.9) 40%,
-                rgba(255, 255, 255, 1) 50%,
-                rgba(255, 235, 200, 0.9) 60%,
-                transparent
-            );
-            filter: blur(8px);
-            animation: beamRace 1.5s cubic-bezier(0.77, 0, 0.18, 1) 0.3s forwards;
-            pointer-events: none;
-            z-index: 10;
         }
 
         /* ── TICKER ── */
@@ -4282,12 +4225,6 @@
         }
     });
 
-    // ── HERO BRAND NAME: wrap for beam pseudo-element ──
-    (function() {
-        const el = document.getElementById('heroBrandName');
-        if (!el) return;
-        el.innerHTML = '<span class="hero-brand-name-wrap">' + el.textContent + '</span>';
-    })();
 
 </script>
 

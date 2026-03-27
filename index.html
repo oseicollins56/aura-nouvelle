@@ -347,26 +347,24 @@
             position: absolute;
             bottom: 80px;
             right: 80px;
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: var(--crimson);
-            color: white;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
             animation: spin 20s linear infinite;
             z-index: 3;
         }
 
-        .hero-badge-text {
-            font-size: 8.5px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            line-height: 1.6;
+        .hero-badge-logo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.25);
         }
 
         .hero-badge svg {
@@ -2785,13 +2783,13 @@
 
     <!-- Spinning badge -->
     <div class="hero-badge">
-        <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
-            <path id="circlePath" fill="none" d="M 55,55 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
-            <text font-size="10.5" font-weight="600" letter-spacing="2.5" fill="rgba(251,206,177,0.9)" font-family="Montserrat, sans-serif" text-transform="uppercase">
-                <textPath href="#circlePath">NEW COLLECTION · GHANA · QUIET LUXURY ·</textPath>
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <path id="circlePath" fill="none" d="M 60,60 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
+            <text font-size="10" font-weight="600" letter-spacing="2.8" fill="rgba(251,206,177,0.95)" font-family="Montserrat, sans-serif">
+                <textPath href="#circlePath">AURA NOUVELLE · GHANA · QUIET LUXURY ·</textPath>
             </text>
         </svg>
-        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:white;font-style:italic;position:relative;z-index:1;">an</span>
+        <img src="logo-badge.svg" alt="Aura Nouvelle" class="hero-badge-logo">
     </div>
 
     <div class="hero-content">
@@ -4010,23 +4008,23 @@
                 </div>
                 <p class="im-sub-title">Dress Length</p>
                 <div class="im-size-table-wrap">
-                    <table class="im-size-table" style="max-width:400px;">
+                    <table class="im-size-table" style="max-width:420px;">
                         <thead><tr><th>Petite</th><th>Regular</th><th>Tall</th></tr></thead>
                         <tbody><tr><td>60"</td><td>63"</td><td>66"</td></tr></tbody>
                     </table>
                 </div>
-                <p class="im-sub-title">Height Guide</p>
+                <p class="im-sub-title">Pant Length</p>
                 <div class="im-size-table-wrap">
-                    <table class="im-size-table" style="max-width:500px;">
-                        <thead><tr><th>Petite</th><th>Regular</th><th>Tall</th></tr></thead>
-                        <tbody><tr><td>5ft 6 &amp; below</td><td>5ft 7 – 5ft 10</td><td>5ft 11 &amp; above</td></tr></tbody>
+                    <table class="im-size-table" style="max-width:520px;">
+                        <thead><tr><th>Petite (in")</th><th>Regular (in")</th><th>Tall (in")</th></tr></thead>
+                        <tbody><tr><td>45" – seam 31"</td><td>48" – seam 34"</td><td>51" – seam 37"</td></tr></tbody>
                     </table>
                 </div>
-                <p class="im-sub-title">Pant Length (inseam)</p>
+                <p class="im-sub-title">Height Guide</p>
                 <div class="im-size-table-wrap">
-                    <table class="im-size-table" style="max-width:500px;">
+                    <table class="im-size-table" style="max-width:540px;">
                         <thead><tr><th>Petite</th><th>Regular</th><th>Tall</th></tr></thead>
-                        <tbody><tr><td>45" (inseam 31")</td><td>48" (inseam 34")</td><td>51" (inseam 37")</td></tr></tbody>
+                        <tbody><tr><td>5ft 6 &amp; below</td><td>5ft 7 – 5ft 10</td><td>5ft 11 &amp; above</td></tr></tbody>
                     </table>
                 </div>
                 <div style="background:rgba(178,34,34,0.05);border:1.5px solid rgba(178,34,34,0.12);padding:18px 20px;margin-top:20px;border-radius:3px;">

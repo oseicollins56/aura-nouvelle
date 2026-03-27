@@ -253,8 +253,7 @@
             line-height: 1;
             margin-bottom: 18px;
             text-shadow: 0 2px 40px rgba(0,0,0,0.4);
-            opacity: 0;
-            animation: fadeSlideUp 1s 0.2s forwards;
+            /* opacity handled per-letter */
         }
 
         .hero-brand-tag {
@@ -388,6 +387,51 @@
         @keyframes fadeSlideUp {
             to { opacity: 1; transform: translateY(0); }
             from { opacity: 0; transform: translateY(20px); }
+        }
+
+        /* ── HERO BRAND NAME LETTER ANIMATION ── */
+        @keyframes letterRise {
+            0%   { opacity: 0; transform: translateY(48px) scaleY(1.08); filter: blur(6px); }
+            60%  { opacity: 1; filter: blur(0); }
+            100% { opacity: 1; transform: translateY(0) scaleY(1); filter: blur(0); }
+        }
+
+        @keyframes shimmerSweep {
+            0%   { background-position: -400% center; }
+            100% { background-position: 400% center; }
+        }
+
+        .hero-brand-name {
+            /* overrides applied below */
+        }
+
+        .hero-brand-letter {
+            display: inline-block;
+            opacity: 0;
+            animation: letterRise 0.75s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .hero-brand-name-wrap {
+            display: block;
+            position: relative;
+            overflow: visible;
+        }
+
+        /* Shimmer sweep that runs after letters land */
+        .hero-brand-name-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                105deg,
+                transparent 30%,
+                rgba(255,220,180,0.55) 50%,
+                transparent 70%
+            );
+            background-size: 300% 100%;
+            animation: shimmerSweep 1.4s ease 1.6s 1 forwards;
+            background-position: -400% center;
+            pointer-events: none;
         }
 
         /* ── TICKER ── */
@@ -2793,7 +2837,7 @@
     </div>
 
     <div class="hero-content">
-        <h1 class="hero-brand-name">Aura Nouvelle</h1>
+        <h1 class="hero-brand-name" id="heroBrandName">Aura Nouvelle</h1>
         <p class="hero-brand-tag">Your Presence, Redefined.</p>
         <p class="hero-subtitle">
             Timeless ready-to-wear from Ghana. Each piece crafted with precision, balance, and refined sophistication — designed not just to be seen, but felt.
@@ -4220,6 +4264,25 @@
         }
     });
 
+    // ── HERO BRAND NAME: letter-by-letter animation ──
+    (function() {
+        const el = document.getElementById('heroBrandName');
+        if (!el) return;
+        const text = el.textContent;
+        const baseDelay = 0.15; // seconds before first letter
+        const stagger  = 0.07; // seconds between each letter
+
+        el.innerHTML = '<span class="hero-brand-name-wrap">' +
+            text.split('').map((ch, i) => {
+                if (ch === ' ') {
+                    // Space: invisible spacer, no animation needed
+                    return '<span style="display:inline-block;width:0.35em;">&nbsp;</span>';
+                }
+                const delay = (baseDelay + i * stagger).toFixed(2);
+                return `<span class="hero-brand-letter" style="animation-delay:${delay}s">${ch}</span>`;
+            }).join('') +
+        '</span>';
+    })();
 
 </script>
 

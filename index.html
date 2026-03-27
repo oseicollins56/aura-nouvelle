@@ -3911,26 +3911,11 @@
 
     // ── POPUP LOGIC ──
     // Check if already seen (remember for 7 days)
-    function hasSeenPopup() {
-        try {
-            const seen = localStorage.getItem('an_popup_seen');
-            if (!seen) return false;
-            const seenTime = parseInt(seen, 10);
-            const sevenDays = 7 * 24 * 60 * 60 * 1000;
-            return (Date.now() - seenTime) < sevenDays;
-        } catch (e) { return false; }
-    }
-
-    function markPopupSeen() {
-        try { localStorage.setItem('an_popup_seen', Date.now()); } catch(e) {}
-    }
-
     function closePopup() {
         const overlay = document.getElementById('popup-overlay');
         overlay.style.transition = 'opacity 0.35s ease';
         overlay.style.opacity = '0';
         setTimeout(() => overlay.classList.add('hidden'), 350);
-        markPopupSeen();
     }
 
     function submitPopup(e) {
@@ -3940,15 +3925,11 @@
         // Show success
         document.getElementById('popup-form-wrap').style.display = 'none';
         document.getElementById('popup-success').style.display = 'block';
-        markPopupSeen();
         // Auto-close after 3.5s
         setTimeout(closePopup, 3500);
     }
 
-    // Hide popup if already seen; otherwise it animates in via CSS
-    if (hasSeenPopup()) {
-        document.getElementById('popup-overlay').classList.add('hidden');
-    }
+    // Popup always shows on every visit
 
     // Birthday field auto-advance
     document.getElementById('pop-mm').addEventListener('input', function() {

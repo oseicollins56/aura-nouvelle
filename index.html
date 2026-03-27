@@ -2779,7 +2779,7 @@
 
     <!-- Spinning badge -->
     <div class="hero-badge">
-        <img src="logo-new.svg" alt="Aura Nouvelle" class="hero-badge-logo">
+        <img src="logo-ivory.png" alt="Aura Nouvelle" class="hero-badge-logo">
     </div>
 
     <div class="hero-content">
@@ -3113,7 +3113,7 @@
     <div class="footer-grid">
         <div>
             <div class="footer-brand-logo">
-                <img src="logo-new.svg" alt="Aura Nouvelle logo">
+                <img src="logo-ivory.png" alt="Aura Nouvelle logo">
                 <div>
                     <div class="footer-brand-name">Aura Nouvelle</div>
                 </div>
@@ -3143,7 +3143,6 @@
                 <li><a href="#" onclick="scrollToCategories(1);return false;">The Aura Woman</a></li>
                 <li><a href="#" onclick="scrollToCategories(0);return false;">The Aura Man</a></li>
                 <li><a href="#" onclick="scrollToCategories(2);return false;">Accessories</a></li>
-                <li><a href="#categories">Accessories</a></li>
                 <li><a href="#categories">Lifestyle</a></li>
             </ul>
         </div>
@@ -4032,12 +4031,12 @@
                     <div>
                         <p style="font-size:9.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dark);margin-bottom:12px;">Choose Amount</p>
                         <div class="im-denom-row">
-                            <div class="im-denom" onclick="imSelectGC(this,200)">GHS 200</div>
                             <div class="im-denom selected" onclick="imSelectGC(this,500)">GHS 500</div>
                             <div class="im-denom" onclick="imSelectGC(this,1000)">GHS 1,000</div>
                             <div class="im-denom" onclick="imSelectGC(this,2000)">GHS 2,000</div>
+                            <div class="im-denom" onclick="imSelectGC(this,5000)">GHS 5,000</div>
                         </div>
-                        <input type="number" class="im-gc-input" id="im-gc-custom" placeholder="Custom amount (GHS)" oninput="imUpdateGCPreview(this.value)" min="50">
+                        <input type="number" class="im-gc-input" id="im-gc-custom" placeholder="Custom amount (GHS)" oninput="imUpdateGCPreview(this.value)" min="500">
                         <p style="font-size:9.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dark);margin:16px 0 10px;">Recipient Details</p>
                         <input type="text" class="im-gc-input" id="im-gc-recipient" placeholder="Recipient's name">
                         <input type="email" class="im-gc-input" id="im-gc-recipient-email" placeholder="Recipient's email address">

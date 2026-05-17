@@ -2410,6 +2410,10 @@
             .hero-badge { display: none; }
             .footer-grid { grid-template-columns: 1fr; gap: 36px; }
             #editorial-strip { padding: 70px 30px; }
+            /* Lookbook grid: 1 column on tablet */
+            .lk-grid { gap: 24px; }
+            /* Cart panel full width on tablet */
+            #cart-panel { width: 100%; max-width: 100%; }
         }
 
         @media (max-width: 640px) {
@@ -2420,6 +2424,46 @@
             .order-grid { grid-template-columns: 1fr; }
             .contact-btns { flex-direction: column; align-items: center; }
             .contact-info-grid { flex-direction: column; gap: 28px; }
+            /* Lookbook card info: tighter padding */
+            .lk-info { padding: 16px 16px 20px; gap: 12px; }
+            .lk-info-top { gap: 8px; }
+            .lk-name { font-size: 20px; }
+            .lk-price { font-size: 18px; }
+            /* Size buttons: smaller on mobile so they don't overflow */
+            .lk-sz-btn { padding: 5px 8px; font-size: 8px; }
+            /* Add to Cart button: full width on mobile */
+            .lk-actions { flex-direction: column; gap: 8px; }
+            .lk-cart-btn { width: 100%; padding: 14px; }
+            /* Carousel arrows always visible on touch */
+            .lk-arrow { opacity: 0.75 !important; }
+            /* Editorial grid: single column on mobile */
+            .ed-grid { grid-template-columns: 1fr !important; }
+            .ed-col { display: flex; flex-direction: column; gap: 6px; }
+            /* Nav logo name: smaller */
+            .nav-logo-name { font-size: 13px; letter-spacing: 2px; }
+            .nav-logo-tag { display: none; }
+            /* Hero text size */
+            .hero-title { font-size: clamp(36px, 10vw, 60px) !important; }
+            /* Mobile menu full screen */
+            #mobileMenu { padding: 30px 28px; }
+            /* Cart panel full width */
+            #cart-panel { width: 100%; right: 0; }
+            /* FAQ items: better padding */
+            .faq-item { padding: 18px 0; }
+            /* Size guide table: allow horizontal scroll */
+            .size-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            /* Info modal body: tighter */
+            .im-body { padding: 28px 22px 40px; }
+            /* Contact section: smaller heading */
+            #contact h2 { font-size: clamp(28px, 8vw, 48px); }
+            /* Delivery cards stack */
+            .delivery-row { gap: 16px; }
+        }
+
+        @media (max-width: 400px) {
+            .lk-sz-btn { padding: 5px 6px; font-size: 7.5px; }
+            .lk-info { padding: 14px 14px 18px; }
+            #navbar { padding: 0 16px; }
         }
 
         /* ── INFO MODALS (About / Size Guide / FAQ / Reviews / Gift Cards) ── */
@@ -2967,26 +3011,21 @@
 
         /* ── MOBILE FIXES ── */
         @media (max-width: 900px) {
-            /* Nav right group: hide Shop Now text label, keep icon buttons */
             .nav-right-group .nav-cta { display: none !important; }
-            /* Hero subtitle font size */
             .hero-subtitle { font-size: 13px !important; line-height: 1.7 !important; }
-            /* Before Sunset header stacks on tablet */
-            #before-sunset .col-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-            #before-sunset .col-header > div:last-child { align-items: flex-start; }
+            #collections .col-header { flex-direction: column; align-items: flex-start; gap: 20px; }
         }
 
         @media (max-width: 640px) {
-            /* Product card image height on mobile */
             .product-card:not(.featured) .product-img-wrap { height: 280px; }
             .product-card.featured .product-img-wrap { height: 360px; }
-            /* Size buttons wrap properly */
             .size-options { gap: 6px; }
             .size-btn { min-width: 36px; padding: 7px 8px; font-size: 9px; }
-            /* Editorial section column layout on mobile */
             .ed-grid { padding: 0 4px; }
-            /* Coming soon modal */
             #coming-soon-overlay > div { padding: 44px 24px; }
+            /* Carousel: always show arrows on touch screens */
+            .lk-carousel:hover .lk-arrow,
+            .lk-arrow { opacity: 0.8 !important; }
         }
 
         /* ── EDITORIAL SECTION ── */
@@ -3498,7 +3537,6 @@
                 </div>
                 <div class="lk-actions">
                     <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-bs','Before Sunset',850,'Before Sunset/A.N_11.jpg')">Add to Cart</button>
-                    <button class="lk-order-btn" onclick="enquireLk(this,'Before Sunset','Before Sunset/A.N_11.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>
@@ -3550,7 +3588,6 @@
                 </div>
                 <div class="lk-actions">
                     <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-bs2','Before Sunset-2',850,'Before Sunset-2/A.N_45.jpg')">Add to Cart</button>
-                    <button class="lk-order-btn" onclick="enquireLk(this,'Before Sunset-2','Before Sunset-2/A.N_45.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>
@@ -3600,7 +3637,6 @@
                 </div>
                 <div class="lk-actions">
                     <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-el','Élan',750,'Elan/A.N_135.jpg')">Add to Cart</button>
-                    <button class="lk-order-btn" onclick="enquireLk(this,'Élan','Elan/A.N_135.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>
@@ -3650,7 +3686,6 @@
                 </div>
                 <div class="lk-actions">
                     <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-wh','Whisper',650,'Whisper/A.N_112.jpg')">Add to Cart</button>
-                    <button class="lk-order-btn" onclick="enquireLk(this,'Whisper','Whisper/A.N_112.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>
@@ -3699,7 +3734,6 @@
                 </div>
                 <div class="lk-actions">
                     <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-sa','Saint',980,'Saint/A.N_76.jpg')">Add to Cart</button>
-                    <button class="lk-order-btn" onclick="enquireLk(this,'Saint','Saint/A.N_76.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>
@@ -3747,7 +3781,6 @@
                 </div>
                 <div class="lk-actions">
                     <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-ma','Madonna Dress',1100,'Madonna/A.N_170.jpg')">Add to Cart</button>
-                    <button class="lk-order-btn" onclick="enquireLk(this,'Madonna Dress','Madonna/A.N_170.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>

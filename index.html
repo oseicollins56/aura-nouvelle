@@ -20,11 +20,16 @@
     <meta name="twitter:image" content="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG">
     <!-- Theme color for mobile browser chrome -->
     <meta name="theme-color" content="#B22222">
-    <!-- Always start at the top — kill browser scroll memory before anything renders -->
+    <!-- Always start at the top — runs before page paints -->
     <script>
-        // Kill browser scroll memory BEFORE the page paints — must be in <head>
+        // 1. Kill browser scroll restoration
         if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        // Jump to top instantly (behavior:'instant' bypasses any CSS scroll-behavior)
+        // 2. Strip any #hash from the URL so the browser can't jump to an anchor
+        //    (e.g. links shared as /aura-nouvelle/#collections should still open at hero)
+        if (window.location.hash) {
+            history.replaceState(null, document.title, window.location.pathname + window.location.search);
+        }
+        // 3. Force instant jump to top
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     </script>
     <!-- Preload critical above-fold assets -->

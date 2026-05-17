@@ -2627,54 +2627,314 @@
             .cat-nav-dropdown { display: none; }
         }
 
-        /* ── BEFORE SUNSET SCROLL GALLERY ── */
-        .bs-scroll-track {
-            overflow-x: auto;
-            overflow-y: hidden;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            cursor: grab;
-        }
-        .bs-scroll-track::-webkit-scrollbar { display: none; }
-        .bs-scroll-track:active { cursor: grabbing; }
-
-        .bs-scroll {
-            display: flex;
-            gap: 4px;
-            align-items: flex-end;
-            padding: 0;
-            width: max-content;
+        /* ══ LOOKBOOK CARDS ══ */
+        .lk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+            gap: 32px;
         }
 
-        .bs-fig {
-            margin: 0;
+        .lk-card {
+            background: #1a1210;
+            border: 1px solid rgba(255,255,255,0.06);
             overflow: hidden;
-            flex-shrink: 0;
-            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
-        .bs-fig-tall  { width: clamp(260px, 28vw, 420px); height: clamp(380px, 55vh, 620px); }
-        .bs-fig-port  { width: clamp(220px, 22vw, 340px); height: clamp(380px, 55vh, 620px); }
-        .bs-fig-sq    { width: clamp(240px, 25vw, 380px); height: clamp(280px, 40vh, 480px); }
+        /* ── Carousel ── */
+        .lk-carousel {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            cursor: pointer;
+            background: #111;
+        }
 
-        .bs-fig img {
+        .lk-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+            will-change: transform;
+        }
+
+        .lk-slide {
+            min-width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .lk-slide img {
             width: 100%; height: 100%;
             object-fit: cover;
             object-position: center top;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.22,0.61,0.36,1), filter 0.5s;
-            filter: brightness(0.9) saturate(0.92);
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
-        .bs-fig:hover img {
-            transform: scale(1.04);
-            filter: brightness(1) saturate(1.05);
+        /* Badge — same style as product cards */
+        .lk-badge {
+            position: absolute;
+            top: 16px; left: 16px;
+            background: var(--crimson);
+            color: #fff;
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            font-family: 'Montserrat', sans-serif;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        /* Counter */
+        .lk-counter {
+            position: absolute;
+            bottom: 16px; right: 16px;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.85);
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-family: 'Montserrat', sans-serif;
+            padding: 4px 10px;
+            border-radius: 20px;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        /* Expand button (top right) */
+        .lk-expand-btn {
+            position: absolute;
+            top: 14px; right: 14px;
+            width: 34px; height: 34px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            z-index: 5;
+            transition: background 0.2s;
+        }
+        .lk-expand-btn:hover { background: var(--crimson); border-color: var(--crimson); }
+
+        /* Arrows */
+        .lk-arrow {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #fff;
+            font-size: 28px;
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+            transition: background 0.2s, opacity 0.2s;
+            opacity: 0;
+            line-height: 1;
+            padding: 0;
+        }
+        .lk-carousel:hover .lk-arrow { opacity: 1; }
+        .lk-prev { left: 10px; }
+        .lk-next { right: 10px; }
+        .lk-arrow:hover { background: var(--crimson); border-color: var(--crimson); }
+        .lk-arrow:disabled { opacity: 0.2 !important; pointer-events: none; }
+
+        /* Dots */
+        .lk-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 16px 0;
+        }
+        .lk-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            cursor: pointer;
+            transition: background 0.25s, transform 0.25s;
+            border: none;
+            padding: 0;
+        }
+        .lk-dot.active {
+            background: var(--crimson);
+            transform: scale(1.4);
+        }
+
+        /* Info strip */
+        .lk-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px 22px;
+            gap: 12px;
+        }
+        .lk-eyebrow {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(251,206,177,0.7);
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 5px;
+        }
+        .lk-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(20px, 2.5vw, 28px);
+            font-weight: 500;
+            font-style: italic;
+            color: #fff;
+            margin: 0;
+        }
+        .lk-order-btn {
+            white-space: nowrap;
+            background: var(--crimson);
+            color: #fff;
+            font-size: 9px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            padding: 11px 18px;
+            text-decoration: none;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        .lk-order-btn:hover { background: #8B0000; }
+
+        /* ══ LIGHTBOX ══ */
+        #lk-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9500;
+            background: rgba(5,2,2,0.97);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #lk-lightbox.open {
+            display: flex;
+        }
+
+        .lk-lb-close {
+            position: absolute;
+            top: 20px; right: 24px;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 26px;
+            cursor: pointer;
+            z-index: 10;
+            line-height: 1;
+            padding: 4px 8px;
+            transition: color 0.2s;
+        }
+        .lk-lb-close:hover { color: #fff; }
+
+        .lk-lb-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 70px 12px;
+            overflow: hidden;
+            max-height: calc(100vh - 160px);
+        }
+
+        #lk-lb-img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            display: block;
+            animation: lbFade 0.25s ease;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        @keyframes lbFade { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+
+        .lk-lb-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #fff;
+            font-size: 36px;
+            width: 52px; height: 52px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            z-index: 10;
+            padding: 0;
+            line-height: 1;
+        }
+        .lk-lb-arrow:hover { background: var(--crimson); border-color: var(--crimson); }
+        .lk-lb-prev { left: 12px; }
+        .lk-lb-next { right: 12px; }
+
+        .lk-lb-strip {
+            display: flex;
+            gap: 6px;
+            padding: 10px 16px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            max-width: 100vw;
+            justify-content: center;
+        }
+        .lk-lb-strip::-webkit-scrollbar { display: none; }
+
+        .lk-lb-thumb {
+            width: 52px; height: 66px;
+            object-fit: cover;
+            object-position: center top;
+            cursor: pointer;
+            opacity: 0.45;
+            transition: opacity 0.2s, outline 0.2s;
+            flex-shrink: 0;
+            outline: 2px solid transparent;
+        }
+        .lk-lb-thumb.active {
+            opacity: 1;
+            outline: 2px solid var(--crimson);
+        }
+
+        .lk-lb-meta {
+            position: absolute;
+            bottom: 100px;
+            left: 50%; transform: translateX(-50%);
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        #lk-lb-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            font-style: italic;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 1px;
+        }
+        #lk-lb-count {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.35);
+            font-family: 'Montserrat', sans-serif;
         }
 
         @media (max-width: 640px) {
-            .bs-fig-tall  { width: 72vw; height: 52vh; }
-            .bs-fig-port  { width: 60vw; height: 52vh; }
-            .bs-fig-sq    { width: 66vw; height: 40vh; }
+            .lk-lb-main { padding: 56px 8px 8px; }
+            .lk-lb-prev { left: 4px; }
+            .lk-lb-next { right: 4px; }
+            .lk-lb-arrow { width: 40px; height: 40px; font-size: 26px; }
+            .lk-carousel:hover .lk-arrow { opacity: 1; }
+            .lk-arrow { opacity: 0.8; }
         }
 
         /* ── MOBILE FIXES ── */
@@ -3325,55 +3585,76 @@
 </section>
 
 
-<!-- ══════════════════ BEFORE SUNSET COLLECTION ══════════════════ -->
-<section id="before-sunset" style="background:#0a0505;padding:80px 0 0;">
-    <!-- Header -->
-    <div class="col-header reveal" style="padding:0 clamp(22px,5vw,100px);margin-bottom:48px;">
+<!-- ══════════════════ LOOKBOOK SETS ══════════════════ -->
+<section id="before-sunset" class="section" style="background:#0d0808;padding-top:80px;padding-bottom:80px;">
+
+    <div class="col-header reveal" style="margin-bottom:56px;">
         <div>
             <p class="col-eyebrow" style="color:#FBCEB1;">Nostalgia In Time</p>
-            <h2 class="col-title" style="color:#fff;"><em>Before Sunset</em></h2>
+            <h2 class="col-title" style="color:#fff;">The <em>Sets</em></h2>
         </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:16px;">
-            <p class="col-sub" style="color:rgba(255,255,255,0.45);text-align:right;">The Blue & Stripe Co-ord — Womenswear</p>
-            <a href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Before%20Sunset%20Co-ord%20Set." target="_blank" style="display:inline-block;background:#B22222;color:#fff;font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:12px 24px;text-decoration:none;white-space:nowrap;">Order This Look →</a>
-        </div>
+        <p class="col-sub" style="color:rgba(255,255,255,0.4);">Swipe to explore · Click to expand</p>
     </div>
 
-    <!-- Horizontal scroll gallery -->
-    <div class="bs-scroll-track">
-        <div class="bs-scroll">
-            <figure class="bs-fig bs-fig-tall">
-                <img src="Before Sunset/A.N_11.jpg" alt="Before Sunset" loading="lazy">
-            </figure>
-            <figure class="bs-fig bs-fig-port">
-                <img src="Before Sunset/A.N_15.jpg" alt="Before Sunset" loading="lazy">
-            </figure>
-            <figure class="bs-fig bs-fig-tall">
-                <img src="Before Sunset/A.N_19.jpg" alt="Before Sunset" loading="lazy">
-            </figure>
-            <figure class="bs-fig bs-fig-port">
-                <img src="Before Sunset/A.N_21.jpg" alt="Before Sunset" loading="lazy">
-            </figure>
-            <figure class="bs-fig bs-fig-sq">
-                <img src="Before Sunset/A.N_22.jpg" alt="Before Sunset" loading="lazy">
-            </figure>
-            <figure class="bs-fig bs-fig-sq">
-                <img src="Before Sunset/A.N_25.jpg" alt="Before Sunset" loading="lazy">
-            </figure>
-            <figure class="bs-fig bs-fig-tall">
-                <img src="Before Sunset/A.N_63.jpg" alt="Before Sunset" loading="lazy">
-            </figure>
-            <figure class="bs-fig bs-fig-tall">
-                <img src="Before Sunset/A.N_74.jpg" alt="Before Sunset" loading="lazy">
-            </figure>
-        </div>
-    </div>
+    <!-- ═══ LOOKBOOK CARDS GRID — add more .lk-card blocks below for new sets ═══ -->
+    <div class="lk-grid">
 
-    <!-- Pull line -->
-    <div style="text-align:center;padding:56px 24px 72px;">
-        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,28px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.6);letter-spacing:1px;">Quiet confidence. Worn at the hour the light turns golden.</p>
+        <!-- SET 01 — Before Sunset -->
+        <div class="lk-card reveal" data-set-name="Before Sunset" data-wa-text="Before%20Sunset%20Co-ord%20Set">
+            <div class="lk-carousel">
+                <div class="lk-track">
+                    <div class="lk-slide"><img src="Before Sunset/A.N_11.jpg" alt="Before Sunset" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_15.jpg" alt="Before Sunset" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_19.jpg" alt="Before Sunset" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_21.jpg" alt="Before Sunset" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_22.jpg" alt="Before Sunset" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_25.jpg" alt="Before Sunset" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_63.jpg" alt="Before Sunset" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_74.jpg" alt="Before Sunset" loading="lazy"></div>
+                </div>
+                <!-- Badge -->
+                <span class="lk-badge">New Collection</span>
+                <!-- Counter -->
+                <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">8</span></span>
+                <!-- Arrows -->
+                <button class="lk-arrow lk-prev" aria-label="Previous">&#8249;</button>
+                <button class="lk-arrow lk-next" aria-label="Next">&#8250;</button>
+                <!-- Expand hint -->
+                <button class="lk-expand-btn" aria-label="View all images">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                </button>
+            </div>
+            <!-- Dots -->
+            <div class="lk-dots"></div>
+            <!-- Info -->
+            <div class="lk-info">
+                <div>
+                    <p class="lk-eyebrow">Womenswear · Co-ord Set</p>
+                    <h3 class="lk-name">Before Sunset</h3>
+                </div>
+                <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Before%20Sunset%20Co-ord%20Set." target="_blank">Order →</a>
+            </div>
+        </div>
+
+        <!-- ADD MORE SETS HERE — duplicate the block above and change images + names -->
+
     </div>
 </section>
+
+<!-- ══ LOOKBOOK LIGHTBOX ══ -->
+<div id="lk-lightbox" aria-hidden="true">
+    <button class="lk-lb-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+    <button class="lk-lb-arrow lk-lb-prev" onclick="lbMove(-1)" aria-label="Previous">&#8249;</button>
+    <button class="lk-lb-arrow lk-lb-next" onclick="lbMove(1)"  aria-label="Next">&#8250;</button>
+    <div class="lk-lb-main">
+        <img id="lk-lb-img" src="" alt="">
+    </div>
+    <div class="lk-lb-strip" id="lk-lb-strip"></div>
+    <div class="lk-lb-meta">
+        <span id="lk-lb-name"></span>
+        <span id="lk-lb-count"></span>
+    </div>
+</div>
 
 
 <!-- ══════════════════ EDITORIAL ══════════════════ -->
@@ -3813,22 +4094,133 @@
     ];
 
     // ══════════════════════════════════════════
-    // ── BEFORE SUNSET — DRAG TO SCROLL ──
+    // ══ LOOKBOOK CAROUSEL + LIGHTBOX ══
     (function() {
-        const track = document.querySelector('.bs-scroll-track');
-        if (!track) return;
-        let isDown = false, startX, scrollLeft;
-        track.addEventListener('mousedown', e => {
-            isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft;
+
+        // ── Per-card carousel init ──
+        document.querySelectorAll('.lk-card').forEach(card => {
+            const track   = card.querySelector('.lk-track');
+            const slides  = card.querySelectorAll('.lk-slide');
+            const dotsWrap= card.querySelector('.lk-dots');
+            const curEl   = card.querySelector('.lk-cur');
+            const prev    = card.querySelector('.lk-prev');
+            const next    = card.querySelector('.lk-next');
+            const expand  = card.querySelector('.lk-expand-btn');
+            const carousel= card.querySelector('.lk-carousel');
+            const total   = slides.length;
+            let idx = 0;
+
+            // Build dots
+            slides.forEach((_, i) => {
+                const d = document.createElement('button');
+                d.className = 'lk-dot' + (i === 0 ? ' active' : '');
+                d.setAttribute('aria-label', 'Slide ' + (i+1));
+                d.onclick = () => goTo(i);
+                dotsWrap.appendChild(d);
+            });
+
+            function goTo(n) {
+                idx = (n + total) % total;
+                track.style.transform = `translateX(-${idx * 100}%)`;
+                dotsWrap.querySelectorAll('.lk-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+                if (curEl) curEl.textContent = idx + 1;
+            }
+
+            prev.onclick = e => { e.stopPropagation(); goTo(idx - 1); };
+            next.onclick = e => { e.stopPropagation(); goTo(idx + 1); };
+
+            // Touch / swipe
+            let tx = 0;
+            carousel.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+            carousel.addEventListener('touchend',   e => {
+                const diff = tx - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 40) goTo(diff > 0 ? idx + 1 : idx - 1);
+            }, { passive: true });
+
+            // Click carousel area → open lightbox
+            carousel.addEventListener('click', e => {
+                if (e.target.closest('.lk-arrow') || e.target.closest('.lk-expand-btn')) return;
+                openLightbox(card, idx);
+            });
+
+            // Expand button → open lightbox
+            expand.onclick = e => { e.stopPropagation(); openLightbox(card, idx); };
         });
-        track.addEventListener('mouseleave', () => isDown = false);
-        track.addEventListener('mouseup',    () => isDown = false);
-        track.addEventListener('mousemove',  e => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - track.offsetLeft;
-            track.scrollLeft = scrollLeft - (x - startX) * 1.4;
+
+        // ── Lightbox ──
+        let lbImages = [], lbIdx = 0;
+
+        window.openLightbox = function(card, startIdx) {
+            lbImages = Array.from(card.querySelectorAll('.lk-slide img')).map(i => i.src);
+            lbIdx = startIdx;
+            const lb   = document.getElementById('lk-lightbox');
+            const name = card.dataset.setName || '';
+            document.getElementById('lk-lb-name').textContent = name;
+            buildStrip();
+            setLbImage(lbIdx);
+            lb.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            // keyboard
+            document.addEventListener('keydown', lbKey);
+        };
+
+        window.closeLightbox = function() {
+            document.getElementById('lk-lightbox').classList.remove('open');
+            document.body.style.overflow = '';
+            document.removeEventListener('keydown', lbKey);
+        };
+
+        window.lbMove = function(dir) {
+            setLbImage((lbIdx + dir + lbImages.length) % lbImages.length);
+        };
+
+        function setLbImage(n) {
+            lbIdx = n;
+            const img = document.getElementById('lk-lb-img');
+            img.src = lbImages[lbIdx];
+            document.getElementById('lk-lb-count').textContent = (lbIdx + 1) + ' / ' + lbImages.length;
+            document.querySelectorAll('.lk-lb-thumb').forEach((t, i) => {
+                t.classList.toggle('active', i === lbIdx);
+            });
+            // scroll active thumb into view
+            const strip = document.getElementById('lk-lb-strip');
+            const active = strip.querySelector('.lk-lb-thumb.active');
+            if (active) active.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+        }
+
+        function buildStrip() {
+            const strip = document.getElementById('lk-lb-strip');
+            strip.innerHTML = '';
+            lbImages.forEach((src, i) => {
+                const t = document.createElement('img');
+                t.src = src;
+                t.className = 'lk-lb-thumb' + (i === lbIdx ? ' active' : '');
+                t.alt = 'Thumbnail ' + (i+1);
+                t.onclick = () => setLbImage(i);
+                strip.appendChild(t);
+            });
+        }
+
+        function lbKey(e) {
+            if (e.key === 'ArrowRight') lbMove(1);
+            if (e.key === 'ArrowLeft')  lbMove(-1);
+            if (e.key === 'Escape')     closeLightbox();
+        }
+
+        // Close on overlay click
+        document.getElementById('lk-lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
         });
+
+        // Touch swipe in lightbox
+        let lbTx = 0;
+        const lb = document.getElementById('lk-lightbox');
+        lb.addEventListener('touchstart', e => { lbTx = e.touches[0].clientX; }, { passive: true });
+        lb.addEventListener('touchend',   e => {
+            const diff = lbTx - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) lbMove(diff > 0 ? 1 : -1);
+        }, { passive: true });
+
     })();
 
     // ── COMING SOON MODAL ──

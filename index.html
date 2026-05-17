@@ -20,6 +20,8 @@
     <meta name="twitter:image" content="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG">
     <!-- Theme color for mobile browser chrome -->
     <meta name="theme-color" content="#B22222">
+    <!-- Always start at the top — kill browser scroll memory before anything renders -->
+    <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
     <!-- Preload critical above-fold assets -->
     <link rel="preload" href="logo-ivory.png" as="image">
     <link rel="preload" href="hero-video.mp4" as="video" type="video/mp4">
@@ -4054,6 +4056,10 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Always open at the very top of the page — disable browser scroll restoration
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
 
     // Navbar shadow on scroll
     window.addEventListener('scroll', () => {

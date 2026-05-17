@@ -2639,22 +2639,6 @@
             pointer-events: none;
         }
 
-        /* Expand button (top right) */
-        .lk-expand-btn {
-            position: absolute;
-            top: 14px; right: 14px;
-            width: 34px; height: 34px;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: #fff;
-            cursor: pointer;
-            z-index: 5;
-            transition: background 0.2s;
-        }
-        .lk-expand-btn:hover { background: var(--crimson); border-color: var(--crimson); }
 
         /* Arrows */
         .lk-arrow {
@@ -2704,10 +2688,15 @@
         /* Info strip */
         .lk-info {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            padding: 18px 20px 24px;
+            gap: 14px;
+        }
+        .lk-info-top {
+            display: flex;
+            align-items: flex-start;
             justify-content: space-between;
-            padding: 18px 20px 22px;
-            gap: 12px;
+            gap: 10px;
         }
         .lk-eyebrow {
             font-size: 9px;
@@ -2719,26 +2708,108 @@
         }
         .lk-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(20px, 2.5vw, 28px);
+            font-size: clamp(20px, 2.5vw, 26px);
             font-weight: 500;
             font-style: italic;
             color: #fff;
             margin: 0;
         }
-        .lk-order-btn {
+        .lk-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(18px, 2vw, 22px);
+            font-weight: 500;
+            color: var(--apricot);
             white-space: nowrap;
+            line-height: 1.1;
+            margin-top: 2px;
+        }
+        /* Color swatches */
+        .lk-opt-row { display: flex; flex-direction: column; gap: 8px; }
+        .lk-opts-label {
+            font-size: 8.5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            font-family: 'Montserrat', sans-serif;
+        }
+        .lk-opts-label span { color: var(--crimson); font-style: italic; margin-left: 4px; }
+        .lk-color-swatches {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .lk-color-swatch {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            outline: 2px solid transparent;
+            cursor: pointer;
+            transition: outline-color 0.2s, transform 0.2s;
+            padding: 0;
+        }
+        .lk-color-swatch.active,
+        .lk-color-swatch:hover {
+            outline-color: var(--apricot);
+            outline-offset: 2px;
+            transform: scale(1.15);
+        }
+        /* Size buttons */
+        .lk-size-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .lk-sz-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.65);
+            font-size: 8.5px;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+            padding: 6px 10px;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s, background 0.2s;
+            line-height: 1;
+        }
+        .lk-sz-btn:hover { border-color: var(--apricot); color: var(--apricot); }
+        .lk-sz-btn.active { background: var(--crimson); border-color: var(--crimson); color: #fff; }
+        /* Actions row */
+        .lk-actions {
+            display: flex;
+            gap: 8px;
+            align-items: stretch;
+        }
+        .lk-cart-btn {
+            flex: 1;
             background: var(--crimson);
             color: #fff;
-            font-size: 9px;
+            border: none;
+            font-size: 8.5px;
             letter-spacing: 2.5px;
             text-transform: uppercase;
             font-family: 'Montserrat', sans-serif;
-            padding: 11px 18px;
-            text-decoration: none;
+            padding: 13px 14px;
+            cursor: pointer;
             transition: background 0.2s;
-            flex-shrink: 0;
+            white-space: nowrap;
         }
-        .lk-order-btn:hover { background: #8B0000; }
+        .lk-cart-btn:hover { background: #8B0000; }
+        .lk-order-btn {
+            background: transparent;
+            border: 1px solid rgba(251,206,177,0.35);
+            color: var(--apricot);
+            font-size: 8.5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            padding: 13px 14px;
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+        .lk-order-btn:hover { background: rgba(251,206,177,0.08); border-color: var(--apricot); }
 
         /* ══ LIGHTBOX ══ */
         #lk-lightbox {
@@ -3370,17 +3441,40 @@
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">8</span></span>
                 <button class="lk-arrow lk-prev" aria-label="Previous">&#8249;</button>
                 <button class="lk-arrow lk-next" aria-label="Next">&#8250;</button>
-                <button class="lk-expand-btn" aria-label="View all images">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                </button>
             </div>
             <div class="lk-dots"></div>
             <div class="lk-info">
-                <div>
-                    <p class="lk-eyebrow">Womenswear · Co-ord Set</p>
-                    <h3 class="lk-name">Before Sunset</h3>
+                <div class="lk-info-top">
+                    <div>
+                        <p class="lk-eyebrow">Womenswear · Co-ord Set</p>
+                        <h3 class="lk-name">Before Sunset</h3>
+                    </div>
+                    <span class="lk-price">GHS 850</span>
                 </div>
-                <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Before%20Sunset%20Co-ord%20Set." target="_blank">Order →</a>
+                <div class="lk-opt-row">
+                    <p class="lk-opts-label">Color <span id="lk-color-hint-bs"></span></p>
+                    <div class="lk-color-swatches">
+                        <button class="lk-color-swatch active" data-color="Bottle Green" style="background:#2D4A2D;" title="Bottle Green" onclick="selectLkColor(this)"></button>
+                        <button class="lk-color-swatch" data-color="Ebony" style="background:#1a1a1a;" title="Ebony" onclick="selectLkColor(this)"></button>
+                        <button class="lk-color-swatch" data-color="Crimson" style="background:#B22222;" title="Crimson" onclick="selectLkColor(this)"></button>
+                    </div>
+                </div>
+                <div class="lk-opt-row">
+                    <p class="lk-opts-label">Size <span class="lk-size-hint" id="lk-sz-hint-bs" style="display:none;">— please select a size</span></p>
+                    <div class="lk-size-btns">
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">XS</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">S</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">M</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">L</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">XL</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">2XL</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">3XL</button>
+                    </div>
+                </div>
+                <div class="lk-actions">
+                    <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-bs','Before Sunset',850,'Before Sunset/A.N_11.jpg')">Add to Cart</button>
+                    <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Before%20Sunset%20Co-ord%20Set." target="_blank">WhatsApp →</a>
+                </div>
             </div>
         </div>
 
@@ -3397,17 +3491,40 @@
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">4</span></span>
                 <button class="lk-arrow lk-prev" aria-label="Previous">&#8249;</button>
                 <button class="lk-arrow lk-next" aria-label="Next">&#8250;</button>
-                <button class="lk-expand-btn" aria-label="View all images">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                </button>
             </div>
             <div class="lk-dots"></div>
             <div class="lk-info">
-                <div>
-                    <p class="lk-eyebrow">Womenswear · Co-ord Set</p>
-                    <h3 class="lk-name">Élan</h3>
+                <div class="lk-info-top">
+                    <div>
+                        <p class="lk-eyebrow">Womenswear · Co-ord Set</p>
+                        <h3 class="lk-name">Élan</h3>
+                    </div>
+                    <span class="lk-price">GHS 750</span>
                 </div>
-                <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Elan%20Co-ord%20Set." target="_blank">Order →</a>
+                <div class="lk-opt-row">
+                    <p class="lk-opts-label">Color <span id="lk-color-hint-el"></span></p>
+                    <div class="lk-color-swatches">
+                        <button class="lk-color-swatch active" data-color="Forest" style="background:#2E4A30;" title="Forest" onclick="selectLkColor(this)"></button>
+                        <button class="lk-color-swatch" data-color="Ebony" style="background:#1a1a1a;" title="Ebony" onclick="selectLkColor(this)"></button>
+                        <button class="lk-color-swatch" data-color="Ivory" style="background:#F7F0E8;border:1px solid rgba(255,255,255,0.15);" title="Ivory" onclick="selectLkColor(this)"></button>
+                    </div>
+                </div>
+                <div class="lk-opt-row">
+                    <p class="lk-opts-label">Size <span class="lk-size-hint" id="lk-sz-hint-el" style="display:none;">— please select a size</span></p>
+                    <div class="lk-size-btns">
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">XS</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">S</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">M</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">L</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">XL</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">2XL</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">3XL</button>
+                    </div>
+                </div>
+                <div class="lk-actions">
+                    <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-el','Élan',750,'Elan/A.N_135.jpg')">Add to Cart</button>
+                    <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Elan%20Co-ord%20Set." target="_blank">WhatsApp →</a>
+                </div>
             </div>
         </div>
 
@@ -3424,17 +3541,40 @@
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">4</span></span>
                 <button class="lk-arrow lk-prev" aria-label="Previous">&#8249;</button>
                 <button class="lk-arrow lk-next" aria-label="Next">&#8250;</button>
-                <button class="lk-expand-btn" aria-label="View all images">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                </button>
             </div>
             <div class="lk-dots"></div>
             <div class="lk-info">
-                <div>
-                    <p class="lk-eyebrow">Womenswear · Co-ord Set</p>
-                    <h3 class="lk-name">Whisper</h3>
+                <div class="lk-info-top">
+                    <div>
+                        <p class="lk-eyebrow">Womenswear · Co-ord Set</p>
+                        <h3 class="lk-name">Whisper</h3>
+                    </div>
+                    <span class="lk-price">GHS 650</span>
                 </div>
-                <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Whisper%20Co-ord%20Set." target="_blank">Order →</a>
+                <div class="lk-opt-row">
+                    <p class="lk-opts-label">Color <span id="lk-color-hint-wh"></span></p>
+                    <div class="lk-color-swatches">
+                        <button class="lk-color-swatch active" data-color="Ivory" style="background:#F7F0E8;border:1px solid rgba(255,255,255,0.2);" title="Ivory" onclick="selectLkColor(this)"></button>
+                        <button class="lk-color-swatch" data-color="Blush" style="background:#FBCEB1;" title="Blush" onclick="selectLkColor(this)"></button>
+                        <button class="lk-color-swatch" data-color="Ebony" style="background:#1a1a1a;" title="Ebony" onclick="selectLkColor(this)"></button>
+                    </div>
+                </div>
+                <div class="lk-opt-row">
+                    <p class="lk-opts-label">Size <span class="lk-size-hint" id="lk-sz-hint-wh" style="display:none;">— please select a size</span></p>
+                    <div class="lk-size-btns">
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">XS</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">S</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">M</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">L</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">XL</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">2XL</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">3XL</button>
+                    </div>
+                </div>
+                <div class="lk-actions">
+                    <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-wh','Whisper',650,'Whisper/A.N_112.jpg')">Add to Cart</button>
+                    <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Whisper%20Co-ord%20Set." target="_blank">WhatsApp →</a>
+                </div>
             </div>
         </div>
 
@@ -3450,17 +3590,40 @@
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">3</span></span>
                 <button class="lk-arrow lk-prev" aria-label="Previous">&#8249;</button>
                 <button class="lk-arrow lk-next" aria-label="Next">&#8250;</button>
-                <button class="lk-expand-btn" aria-label="View all images">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                </button>
             </div>
             <div class="lk-dots"></div>
             <div class="lk-info">
-                <div>
-                    <p class="lk-eyebrow">Womenswear · Collection</p>
-                    <h3 class="lk-name">Saint</h3>
+                <div class="lk-info-top">
+                    <div>
+                        <p class="lk-eyebrow">Womenswear · Collection</p>
+                        <h3 class="lk-name">Saint</h3>
+                    </div>
+                    <span class="lk-price">GHS 980</span>
                 </div>
-                <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20from%20the%20Saint%20Collection." target="_blank">Order →</a>
+                <div class="lk-opt-row">
+                    <p class="lk-opts-label">Color <span id="lk-color-hint-sa"></span></p>
+                    <div class="lk-color-swatches">
+                        <button class="lk-color-swatch active" data-color="Ebony" style="background:#1a1a1a;" title="Ebony" onclick="selectLkColor(this)"></button>
+                        <button class="lk-color-swatch" data-color="Crimson" style="background:#B22222;" title="Crimson" onclick="selectLkColor(this)"></button>
+                        <button class="lk-color-swatch" data-color="Ivory" style="background:#F7F0E8;border:1px solid rgba(255,255,255,0.2);" title="Ivory" onclick="selectLkColor(this)"></button>
+                    </div>
+                </div>
+                <div class="lk-opt-row">
+                    <p class="lk-opts-label">Size <span class="lk-size-hint" id="lk-sz-hint-sa" style="display:none;">— please select a size</span></p>
+                    <div class="lk-size-btns">
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">XS</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">S</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">M</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">L</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">XL</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">2XL</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">3XL</button>
+                    </div>
+                </div>
+                <div class="lk-actions">
+                    <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-sa','Saint',980,'Saint/A.N_76.jpg')">Add to Cart</button>
+                    <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20from%20the%20Saint%20Collection." target="_blank">WhatsApp →</a>
+                </div>
             </div>
         </div>
 
@@ -3475,17 +3638,40 @@
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">2</span></span>
                 <button class="lk-arrow lk-prev" aria-label="Previous">&#8249;</button>
                 <button class="lk-arrow lk-next" aria-label="Next">&#8250;</button>
-                <button class="lk-expand-btn" aria-label="View all images">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                </button>
             </div>
             <div class="lk-dots"></div>
             <div class="lk-info">
-                <div>
-                    <p class="lk-eyebrow">Womenswear · Collection</p>
-                    <h3 class="lk-name">Madonna</h3>
+                <div class="lk-info-top">
+                    <div>
+                        <p class="lk-eyebrow">Womenswear · Collection</p>
+                        <h3 class="lk-name">Madonna</h3>
+                    </div>
+                    <span class="lk-price">GHS 1,100</span>
                 </div>
-                <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20from%20the%20Madonna%20Collection." target="_blank">Order →</a>
+                <div class="lk-opt-row">
+                    <p class="lk-opts-label">Color <span id="lk-color-hint-ma"></span></p>
+                    <div class="lk-color-swatches">
+                        <button class="lk-color-swatch active" data-color="Crimson" style="background:#B22222;" title="Crimson" onclick="selectLkColor(this)"></button>
+                        <button class="lk-color-swatch" data-color="Ebony" style="background:#1a1a1a;" title="Ebony" onclick="selectLkColor(this)"></button>
+                        <button class="lk-color-swatch" data-color="Ivory" style="background:#F7F0E8;border:1px solid rgba(255,255,255,0.2);" title="Ivory" onclick="selectLkColor(this)"></button>
+                    </div>
+                </div>
+                <div class="lk-opt-row">
+                    <p class="lk-opts-label">Size <span class="lk-size-hint" id="lk-sz-hint-ma" style="display:none;">— please select a size</span></p>
+                    <div class="lk-size-btns">
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">XS</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">S</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">M</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">L</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">XL</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">2XL</button>
+                        <button class="lk-sz-btn" onclick="selectLkSize(this)">3XL</button>
+                    </div>
+                </div>
+                <div class="lk-actions">
+                    <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-ma','Madonna',1100,'Madonna/A.N_170.jpg')">Add to Cart</button>
+                    <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20from%20the%20Madonna%20Collection." target="_blank">WhatsApp →</a>
+                </div>
             </div>
         </div>
 
@@ -3919,7 +4105,6 @@
             const curEl   = card.querySelector('.lk-cur');
             const prev    = card.querySelector('.lk-prev');
             const next    = card.querySelector('.lk-next');
-            const expand  = card.querySelector('.lk-expand-btn');
             const carousel= card.querySelector('.lk-carousel');
             const total   = slides.length;
             let idx = 0;
@@ -3950,16 +4135,51 @@
                 const diff = tx - e.changedTouches[0].clientX;
                 if (Math.abs(diff) > 40) goTo(diff > 0 ? idx + 1 : idx - 1);
             }, { passive: true });
-
-            // Click carousel area → open lightbox
-            carousel.addEventListener('click', e => {
-                if (e.target.closest('.lk-arrow') || e.target.closest('.lk-expand-btn')) return;
-                openLightbox(card, idx);
-            });
-
-            // Expand button → open lightbox
-            expand.onclick = e => { e.stopPropagation(); openLightbox(card, idx); };
         });
+
+        // ── Size & color selection helpers (lookbook cards) ──
+        window.selectLkSize = function(btn) {
+            const wrap = btn.closest('.lk-size-btns');
+            wrap.querySelectorAll('.lk-sz-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        };
+
+        window.selectLkColor = function(btn) {
+            const wrap = btn.closest('.lk-color-swatches');
+            wrap.querySelectorAll('.lk-color-swatch').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        };
+
+        // ── Add to cart from lookbook card ──
+        window.addToCartLk = function(btn, sizeHintId, name, price, img) {
+            const card = btn.closest('.lk-card');
+            const selectedSize = card.querySelector('.lk-sz-btn.active');
+            const selectedColor = card.querySelector('.lk-color-swatch.active');
+            const hint = document.getElementById(sizeHintId);
+
+            if (!selectedSize) {
+                if (hint) { hint.style.display = 'inline'; }
+                const sizeBtns = card.querySelector('.lk-size-btns');
+                if (sizeBtns) {
+                    sizeBtns.style.outline = '1px solid #B22222';
+                    setTimeout(() => { sizeBtns.style.outline = 'none'; }, 900);
+                }
+                return;
+            }
+            if (hint) hint.style.display = 'none';
+
+            const size  = selectedSize.textContent.trim();
+            const color = selectedColor ? selectedColor.dataset.color : '';
+            const label = name + (color ? ' — ' + color : '') + ' (' + size + ')';
+            const existing = cart.find(i => i.name === name && i.size === size && i.color === color);
+            if (existing) { existing.qty++; }
+            else { cart.push({ name, price, img, size, color, qty: 1 }); }
+            updateCartUI();
+            showToast('✦  Added to cart — ' + label);
+            btn.textContent = '✓ Added';
+            btn.style.background = '#27ae60';
+            setTimeout(() => { btn.textContent = 'Add to Cart'; btn.style.background = ''; }, 1800);
+        };
 
         // ── Lightbox ──
         let lbImages = [], lbIdx = 0;
@@ -4161,7 +4381,7 @@
                 <img class="cart-item-img" src="${item.img}" alt="${item.name}">
                 <div class="cart-item-info">
                     <div class="cart-item-name">${item.name}</div>
-                    <div class="cart-item-size">Size: ${item.size}</div>
+                    <div class="cart-item-size">${item.color ? item.color + ' · ' : ''}Size: ${item.size}</div>
                     <div class="cart-item-price">GHS ${(item.price * item.qty).toLocaleString()}</div>
                 </div>
                 <div class="cart-item-controls">

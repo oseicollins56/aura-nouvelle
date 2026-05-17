@@ -20,6 +20,10 @@
     <meta name="twitter:image" content="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG">
     <!-- Theme color for mobile browser chrome -->
     <meta name="theme-color" content="#B22222">
+    <!-- Preload critical above-fold assets -->
+    <link rel="preload" href="logo-ivory.png" as="image">
+    <link rel="preload" href="hero-video.mp4" as="video" type="video/mp4">
+    <link rel="preload" href="Before Sunset/A.N_11.jpg" as="image" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -2605,6 +2609,15 @@
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
+            /* Blur-up: starts blurred, fades clear once loaded */
+            filter: blur(8px);
+            transform: scale(1.04);
+            transition: filter 0.4s ease, transform 0.4s ease;
+            will-change: filter, transform;
+        }
+        .lk-slide img.img-loaded {
+            filter: blur(0);
+            transform: scale(1);
         }
 
         /* Badge — same style as product cards */
@@ -3473,7 +3486,7 @@
                 </div>
                 <div class="lk-actions">
                     <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-bs','Before Sunset',850,'Before Sunset/A.N_11.jpg')">Add to Cart</button>
-                    <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Before%20Sunset%20Co-ord%20Set." target="_blank">WhatsApp →</a>
+                    <button class="lk-order-btn" onclick="enquireLk(this,'Before Sunset','Before Sunset/A.N_11.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>
@@ -3523,7 +3536,7 @@
                 </div>
                 <div class="lk-actions">
                     <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-el','Élan',750,'Elan/A.N_135.jpg')">Add to Cart</button>
-                    <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Elan%20Co-ord%20Set." target="_blank">WhatsApp →</a>
+                    <button class="lk-order-btn" onclick="enquireLk(this,'Élan','Elan/A.N_135.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>
@@ -3573,7 +3586,7 @@
                 </div>
                 <div class="lk-actions">
                     <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-wh','Whisper',650,'Whisper/A.N_112.jpg')">Add to Cart</button>
-                    <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20the%20Whisper%20Co-ord%20Set." target="_blank">WhatsApp →</a>
+                    <button class="lk-order-btn" onclick="enquireLk(this,'Whisper','Whisper/A.N_112.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>
@@ -3622,17 +3635,17 @@
                 </div>
                 <div class="lk-actions">
                     <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-sa','Saint',980,'Saint/A.N_76.jpg')">Add to Cart</button>
-                    <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20from%20the%20Saint%20Collection." target="_blank">WhatsApp →</a>
+                    <button class="lk-order-btn" onclick="enquireLk(this,'Saint','Saint/A.N_76.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>
 
-        <!-- SET 05 — Madonna -->
-        <div class="lk-card reveal reveal-delay-1" data-set-name="Madonna" data-wa-text="Madonna%20Collection">
+        <!-- SET 05 — Madonna Dress -->
+        <div class="lk-card reveal reveal-delay-1" data-set-name="Madonna Dress" data-wa-text="Madonna%20Dress">
             <div class="lk-carousel">
                 <div class="lk-track">
-                    <div class="lk-slide"><img src="Madonna/A.N_170.jpg" alt="Madonna" loading="lazy" decoding="async"></div>
-                    <div class="lk-slide"><img src="Madonna/A.N_174.jpg" alt="Madonna" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Madonna/A.N_170.jpg" alt="Madonna Dress" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Madonna/A.N_174.jpg" alt="Madonna Dress" loading="lazy" decoding="async"></div>
                 </div>
                 <span class="lk-badge">New Collection</span>
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">2</span></span>
@@ -3644,7 +3657,7 @@
                 <div class="lk-info-top">
                     <div>
                         <p class="lk-eyebrow">Womenswear · Collection</p>
-                        <h3 class="lk-name">Madonna</h3>
+                        <h3 class="lk-name">Madonna Dress</h3>
                     </div>
                     <span class="lk-price">GHS 1,100</span>
                 </div>
@@ -3669,8 +3682,8 @@
                     </div>
                 </div>
                 <div class="lk-actions">
-                    <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-ma','Madonna',1100,'Madonna/A.N_170.jpg')">Add to Cart</button>
-                    <a class="lk-order-btn" href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20order%20from%20the%20Madonna%20Collection." target="_blank">WhatsApp →</a>
+                    <button class="lk-cart-btn" onclick="addToCartLk(this,'lk-sz-hint-ma','Madonna Dress',1100,'Madonna/A.N_170.jpg')">Add to Cart</button>
+                    <button class="lk-order-btn" onclick="enquireLk(this,'Madonna Dress','Madonna/A.N_170.jpg')">Enquire →</button>
                 </div>
             </div>
         </div>
@@ -4151,6 +4164,30 @@
         };
 
         // ── Add to cart from lookbook card ──
+        // ── Email enquiry from lookbook card (includes selected piece, colour, size & image link) ──
+        const SITE_BASE = 'https://oseicollins56.github.io/aura-nouvelle/';
+
+        window.enquireLk = function(btn, name, imgPath) {
+            const card = btn.closest('.lk-card');
+            const selectedSize  = card.querySelector('.lk-sz-btn.active');
+            const selectedColor = card.querySelector('.lk-color-swatch.active');
+            const size  = selectedSize  ? selectedSize.textContent.trim() : '(not yet selected)';
+            const color = selectedColor ? selectedColor.dataset.color     : '(not yet selected)';
+            const imgUrl = SITE_BASE + imgPath.split('/').map(encodeURIComponent).join('/');
+
+            const subject = encodeURIComponent('Enquiry — ' + name + ' | Aura Nouvelle');
+            const body = encodeURIComponent(
+                'Hello Aura Nouvelle,\n\n' +
+                'I\'d like to enquire about the ' + name + '.\n\n' +
+                'Colour: ' + color + '\n' +
+                'Size:   ' + size + '\n\n' +
+                'Piece preview: ' + imgUrl + '\n\n' +
+                'Please let me know about availability, pricing, and how to place my order.\n\n' +
+                'Thank you.'
+            );
+            window.open('mailto:info.auranouvelle@gmail.com?subject=' + subject + '&body=' + body);
+        };
+
         window.addToCartLk = function(btn, sizeHintId, name, price, img) {
             const card = btn.closest('.lk-card');
             const selectedSize = card.querySelector('.lk-sz-btn.active');
@@ -4256,6 +4293,15 @@
         }, { passive: true });
 
     })();
+
+    // ── IMAGE BLUR-UP: mark loaded images as clear immediately ──
+    document.querySelectorAll('.lk-slide img, .editorial-img, .about-img').forEach(img => {
+        if (img.complete && img.naturalWidth > 0) {
+            img.classList.add('img-loaded');
+        } else {
+            img.addEventListener('load', () => img.classList.add('img-loaded'));
+        }
+    });
 
     // ── COMING SOON MODAL ──
     function openComingSoon(name) {

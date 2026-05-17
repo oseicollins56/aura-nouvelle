@@ -21,7 +21,12 @@
     <!-- Theme color for mobile browser chrome -->
     <meta name="theme-color" content="#B22222">
     <!-- Always start at the top — kill browser scroll memory before anything renders -->
-    <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+    <script>
+        // Kill browser scroll memory BEFORE the page paints — must be in <head>
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        // Jump to top instantly (behavior:'instant' bypasses any CSS scroll-behavior)
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    </script>
     <!-- Preload critical above-fold assets -->
     <link rel="preload" href="logo-ivory.png" as="image">
     <link rel="preload" href="hero-video.mp4" as="video" type="video/mp4">
@@ -46,7 +51,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html { scroll-behavior: smooth; }
+        /* scroll-behavior managed per-call via JS, not globally */
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -4111,7 +4116,9 @@
 
     // Always open at the very top of the page — disable browser scroll restoration
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // Re-enable smooth scrolling for in-page anchor links only (not page load)
+    document.documentElement.style.scrollBehavior = 'smooth';
 
     // Navbar shadow on scroll
     window.addEventListener('scroll', () => {

@@ -222,8 +222,9 @@
             width: 100%;
             height: 100%;
             display: block;
-            object-fit: cover;
+            object-fit: contain;
             object-position: center center;
+            background: #0a0505;
         }
         .hero-bg img {
             position: absolute;
@@ -239,8 +240,7 @@
             position: absolute;
             inset: 0;
             background:
-                linear-gradient(to bottom, rgba(5,2,2,0.70) 0%, rgba(5,2,2,0.30) 30%, rgba(5,2,2,0.30) 65%, rgba(5,2,2,0.80) 100%),
-                linear-gradient(to right, rgba(5,2,2,0.60) 0%, rgba(5,2,2,0.20) 50%, rgba(5,2,2,0.60) 100%);
+                linear-gradient(to bottom, rgba(5,2,2,0.35) 0%, rgba(5,2,2,0.10) 30%, rgba(5,2,2,0.10) 65%, rgba(5,2,2,0.45) 100%);
             z-index: 1;
         }
 
@@ -2632,7 +2632,6 @@
 <!-- ══════════════════ NAVBAR ══════════════════ -->
 <nav id="navbar">
     <ul class="nav-links">
-        <li><a href="#collections">Collections</a></li>
         <li class="cat-nav-wrap">
             <a href="#categories" id="catNavTrigger" onclick="toggleCatDropdown(event)">Categories<span class="cat-nav-chevron">▾</span></a>
             <div class="cat-nav-dropdown" id="catNavDropdown">
@@ -2643,7 +2642,7 @@
         </li>
         <li><a href="#" onclick="openInfoModal('about');return false;">About</a></li>
         <li><a href="#" onclick="openInfoModal('size-guide');return false;">Size Guide</a></li>
-        <li><a href="#" onclick="openInfoModal('faq');return false;">FAQ</a></li>
+        <li><a href="#" onclick="openInfoModal('giftcards');return false;">Gift Cards</a></li>
     </ul>
 
     <!-- Centre logo -->
@@ -2660,11 +2659,6 @@
         <button class="nav-icon-btn" onclick="openSearch()" title="Search">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
-        <!-- Gift Card -->
-        <a href="#" onclick="openInfoModal('giftcards');return false;" class="nav-gc-btn" title="Gift Cards">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="9" width="22" height="13" rx="2"/><path d="M16 2H8a4 4 0 00-4 4v3h16V6a4 4 0 00-4-4z"/><line x1="12" y1="9" x2="12" y2="22"/></svg>
-            Gift Card
-        </a>
         <!-- Cart -->
         <div class="cart-icon-wrap nav-icon-btn" onclick="toggleCart()" title="Cart">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -2681,11 +2675,10 @@
 <!-- Mobile Menu -->
 <div id="mobileMenu">
     <ul>
-        <li><a href="#collections" onclick="closeMenu()">Collections</a></li>
         <li><a href="#categories" onclick="closeMenu()">Categories</a></li>
         <li><a href="#" onclick="openInfoModal('about');closeMenu();return false;">About</a></li>
         <li><a href="#" onclick="openInfoModal('size-guide');closeMenu();return false;">Size Guide</a></li>
-        <li><a href="#" onclick="openInfoModal('faq');closeMenu();return false;">FAQ</a></li>
+        <li><a href="#" onclick="openInfoModal('giftcards');closeMenu();return false;">Gift Cards</a></li>
         <li><a href="#collections" onclick="closeMenu()">Shop Now →</a></li>
         <li><a href="#" onclick="openInfoModal('giftcards');closeMenu();return false;">Gift Cards</a></li>
     </ul>
@@ -2821,8 +2814,6 @@
     </div>
 
     <div class="hero-content">
-        <h1 class="hero-brand-name" id="heroBrandName">Aura Nouvelle</h1>
-        <p class="hero-brand-tag">Your Presence, Redefined.</p>
         <p class="hero-subtitle">
             Timeless ready-to-wear from Ghana. Each piece crafted with precision, balance, and refined sophistication — designed not just to be seen, but felt.
         </p>

@@ -2800,10 +2800,12 @@
 <!-- ══════════════════ HERO ══════════════════ -->
 <section id="hero">
     <div class="hero-bg" id="heroBg">
-        <video autoplay muted loop playsinline preload="auto">
+        <!-- Poster image shows instantly while video loads -->
+        <img id="heroPoster" src="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG" alt="Aura Nouvelle"
+             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;z-index:1;transition:opacity 0.6s ease;">
+        <video id="heroVideo" autoplay muted loop playsinline preload="auto"
+               style="opacity:0;transition:opacity 0.8s ease;position:relative;z-index:2;">
             <source src="hero-video.mp4" type="video/mp4">
-            <!-- Fallback image if video fails to load -->
-            <img src="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG" alt="Aura Nouvelle">
         </video>
     </div>
     <div class="hero-overlay"></div>
@@ -3348,10 +3350,37 @@
         nav.style.boxShadow = window.scrollY > 60 ? '0 2px 24px rgba(0,0,0,0.08)' : 'none';
     }, { passive: true });
 
-    // Hero zoom-in on load
-    window.addEventListener('load', () => {
-        document.getElementById('heroBg').classList.add('loaded');
-    });
+    // Hero video: show poster instantly, fade video in the moment it can play
+    (function() {
+        const video = document.getElementById('heroVideo');
+        const poster = document.getElementById('heroPoster');
+        if (!video) return;
+
+        // Force load immediately
+        video.load();
+
+        function revealVideo() {
+            video.style.opacity = '1';
+            // Fade out poster after video is visible
+            setTimeout(() => { if (poster) poster.style.opacity = '0'; }, 700);
+        }
+
+        if (video.readyState >= 3) {
+            // Already buffered enough — show right away
+            revealVideo();
+        } else {
+            video.addEventListener('canplay', revealVideo, { once: true });
+            // Safety fallback: if canplay never fires (autoplay blocked etc.), show after 3s
+            setTimeout(() => {
+                if (parseFloat(video.style.opacity) < 1) revealVideo();
+            }, 3000);
+        }
+
+        // Ensure autoplay on mobile (some browsers need a user interaction hint)
+        document.addEventListener('touchstart', function() {
+            if (video.paused) video.play().catch(() => {});
+        }, { once: true });
+    })();
 
     // ══════════════════════════════════════════
     // PRODUCT CATALOGUE (for search + cart)

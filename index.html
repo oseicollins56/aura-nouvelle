@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aura Nouvelle — Your Presence, Redefined.</title>
     <meta name="description" content="Aura Nouvelle — Quiet luxury ready-to-wear from Ghana. Timeless pieces crafted with precision, balance, and refined sophistication. Your Presence, Redefined.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo-ivory.png">
+    <link rel="apple-touch-icon" href="logo-ivory.png">
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Aura Nouvelle — Your Presence, Redefined.">
+    <meta property="og:description" content="Quiet luxury ready-to-wear from Ghana. Timeless pieces crafted with precision, balance, and refined sophistication.">
+    <meta property="og:image" content="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG">
+    <meta property="og:url" content="https://oseicollins56.github.io/aura-nouvelle/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aura Nouvelle — Your Presence, Redefined.">
+    <meta name="twitter:description" content="Quiet luxury ready-to-wear from Ghana. Timeless pieces crafted with precision, balance, and refined sophistication.">
+    <meta name="twitter:image" content="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG">
+    <!-- Theme color for mobile browser chrome -->
+    <meta name="theme-color" content="#B22222">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -200,6 +215,15 @@
             inset: 0;
             background: #0a0505;
             overflow: hidden;
+        }
+        .hero-bg video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center center;
         }
         .hero-bg img {
             position: absolute;
@@ -2622,6 +2646,15 @@
         <li><a href="#" onclick="openInfoModal('faq');return false;">FAQ</a></li>
     </ul>
 
+    <!-- Centre logo -->
+    <a href="#hero" class="nav-logo" style="position:absolute;left:50%;transform:translateX(-50%);">
+        <img src="logo-ivory.png" alt="Aura Nouvelle">
+        <div>
+            <span class="nav-logo-name">Aura Nouvelle</span>
+            <span class="nav-logo-tag">Your Presence, Redefined.</span>
+        </div>
+    </a>
+
     <div class="nav-icon-group">
         <!-- Search -->
         <button class="nav-icon-btn" onclick="openSearch()" title="Search">
@@ -2774,7 +2807,11 @@
 <!-- ══════════════════ HERO ══════════════════ -->
 <section id="hero">
     <div class="hero-bg" id="heroBg">
-        <img src="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG" alt="Aura Nouvelle">
+        <video autoplay muted loop playsinline preload="auto">
+            <source src="hero-video.mp4" type="video/mp4">
+            <!-- Fallback image if video fails to load -->
+            <img src="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG" alt="Aura Nouvelle">
+        </video>
     </div>
     <div class="hero-overlay"></div>
 
@@ -3175,7 +3212,7 @@
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; 2025 Aura Nouvelle. All Rights Reserved. Founded in Accra, Ghana.</p>
+        <p>&copy; 2026 Aura Nouvelle. All Rights Reserved. Founded in Accra, Ghana.</p>
         <p class="fn-tagline">Your Presence, Redefined.</p>
     </div>
 </footer>
@@ -3642,7 +3679,8 @@
 
     function updateGCPreview(val) {
         const amt = parseInt(val) || selectedGCAmount;
-        document.getElementById('gcPreviewAmt').textContent = amt.toLocaleString();
+        const previewEl = document.getElementById('gcPreviewAmt');
+        if (previewEl) previewEl.textContent = amt.toLocaleString();
         if (val && parseInt(val) > 0) {
             selectedGCAmount = parseInt(val);
             document.querySelectorAll('.gc-denom').forEach(b => b.classList.remove('selected'));
@@ -3672,7 +3710,8 @@
             gcs.push({ code, amount: amt, used: false, recipient, date: new Date().toISOString() });
             localStorage.setItem('an_gift_cards', JSON.stringify(gcs));
         } catch(e) {}
-        document.getElementById('gcPreviewCode').textContent = code;
+        const gcCodeEl = document.getElementById('gcPreviewCode');
+        if (gcCodeEl) gcCodeEl.textContent = code;
         const msg = `Hello Aura Nouvelle! I'd like to purchase a Gift Card:\n\n🎁 Amount: GHS ${amt.toLocaleString()}\n📋 Code: ${code}\n\n👤 Recipient: ${recipient}\n📬 Send to: ${contact}\n✍️ From: ${sender}\n💬 Message: ${message || 'N/A'}\n\nPlease confirm payment details so the gift card can be activated. Thank you!`;
         window.open('https://wa.me/233246131857?text=' + encodeURIComponent(msg), '_blank');
         showToast('✦  Gift card request sent via WhatsApp!');

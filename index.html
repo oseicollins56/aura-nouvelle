@@ -2630,8 +2630,14 @@
         /* ══ LOOKBOOK CARDS ══ */
         .lk-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
             gap: 32px;
+            max-width: 900px;   /* single card: centred, comfortable width */
+            margin: 0 auto;
+        }
+        /* When 2+ cards exist, let them fill the full container */
+        .lk-grid:has(.lk-card:nth-child(2)) {
+            max-width: 100%;
         }
 
         .lk-card {
@@ -3410,200 +3416,24 @@
 <section class="section" id="collections">
     <div class="col-header reveal">
         <div>
-            <span class="section-eyebrow" id="collections-eyebrow">Featured Pieces</span>
-            <h2 class="section-title" id="collections-title">Nostalgia <em>In Time</em></h2>
-            <p class="desc">Each piece embodies structure and softness, restraint and confidence — a harmony of modern sophistication.</p>
+            <span class="section-eyebrow">Collections</span>
+            <h2 class="section-title">Nostalgia <em>In Time</em></h2>
+            <p class="desc">Each set embodies structure and softness, restraint and confidence — a harmony of modern sophistication.</p>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
-            <a href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20see%20all%20available%20pieces." target="_blank" class="link-arrow">View All Pieces &rarr;</a>
-            <button id="clear-filter-btn" onclick="clearCategoryFilter()" style="display:none;background:none;border:1px solid var(--crimson);color:var(--crimson);padding:6px 14px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;">✕ Clear Filter</button>
+            <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,0.35);font-family:'Montserrat',sans-serif;">Swipe · Click to expand</p>
+            <a href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20see%20all%20available%20collections." target="_blank" class="link-arrow">Shop All &rarr;</a>
         </div>
-    </div>
-
-    <div class="products-grid">
-
-        <!-- ① Crimson Statement Gown — IN STOCK -->
-        <div class="product-card featured reveal reveal-delay-1" data-product="The Crimson Statement Gown" data-category="woman">
-            <div class="product-img-wrap">
-                <img src="01f006cc-f8f5-40c0-b839-c07f7daec757.JPG" alt="The Crimson Statement Gown" loading="eager">
-                <span class="product-badge">New Drop</span>
-            </div>
-            <div class="product-info">
-                <p class="product-cat">Couture · Womenswear</p>
-                <h3 class="product-name">The Crimson Statement Gown</h3>
-                <!-- Size selector -->
-                <div class="size-selector">
-                    <div class="size-selector-head">
-                        <span class="size-label">Select Size</span>
-                        <a href="#" onclick="openInfoModal('size-guide');return false;" class="size-guide-link">Size Guide</a>
-                    </div>
-                    <div class="size-options">
-                        <button class="size-btn" onclick="selectSize(this)">XS</button>
-                        <button class="size-btn" onclick="selectSize(this)">S</button>
-                        <button class="size-btn" onclick="selectSize(this)">M</button>
-                        <button class="size-btn" onclick="selectSize(this)">L</button>
-                        <button class="size-btn" onclick="selectSize(this)">XL</button>
-                        <button class="size-btn" onclick="selectSize(this)">2XL</button>
-                        <button class="size-btn" onclick="selectSize(this)">3XL</button>
-                    </div>
-                    <p class="size-hint" id="hint-1">Please select a size before ordering.</p>
-                </div>
-                <div class="product-foot">
-                    <span class="product-price">GHS 1,800</span>
-                    <button class="add-to-cart-btn" onclick="addToCart(this,'hint-1','The Crimson Statement Gown',1800,'01f006cc-f8f5-40c0-b839-c07f7daec757.JPG')">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ② Botanical Power Co-ord — IN STOCK -->
-        <div class="product-card reveal reveal-delay-2" data-product="Botanical Power Co-ord Set" data-category="woman">
-            <div class="product-img-wrap">
-                <img src="54e55dfa-d8c2-49e5-b0c4-a233a6b3a244.JPG" alt="Botanical Power Co-ord" loading="lazy">
-                <span class="product-badge">Bestseller</span>
-            </div>
-            <div class="product-info">
-                <p class="product-cat">Pieces · Womenswear</p>
-                <h3 class="product-name">Botanical Power Co-ord Set</h3>
-                <div class="size-selector">
-                    <div class="size-selector-head">
-                        <span class="size-label">Select Size</span>
-                        <a href="#" onclick="openInfoModal('size-guide');return false;" class="size-guide-link">Size Guide</a>
-                    </div>
-                    <div class="size-options">
-                        <button class="size-btn" onclick="selectSize(this)">XS</button>
-                        <button class="size-btn" onclick="selectSize(this)">S</button>
-                        <button class="size-btn" onclick="selectSize(this)">M</button>
-                        <button class="size-btn" onclick="selectSize(this)">L</button>
-                        <button class="size-btn" onclick="selectSize(this)">XL</button>
-                        <button class="size-btn" onclick="selectSize(this)">2XL</button>
-                        <button class="size-btn" onclick="selectSize(this)">3XL</button>
-                    </div>
-                    <p class="size-hint" id="hint-2">Please select a size before ordering.</p>
-                </div>
-                <div class="product-foot">
-                    <span class="product-price">GHS 950</span>
-                    <button class="add-to-cart-btn" onclick="addToCart(this,'hint-2','Botanical Power Co-ord Set',950,'54e55dfa-d8c2-49e5-b0c4-a233a6b3a244.JPG')">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ③ Noir Silhouette Midi Dress — OUT OF STOCK -->
-        <div class="product-card oos reveal reveal-delay-3" data-product="Noir Silhouette Midi Dress" data-category="woman">
-            <div class="product-img-wrap">
-                <img src="5578acb0-c4cb-4c1e-98c8-3faed325544e.JPG" alt="Noir Silhouette Dress" loading="lazy">
-                <span class="oos-badge">Out of Stock</span>
-            </div>
-            <div class="product-info">
-                <p class="product-cat">Pieces · Womenswear</p>
-                <h3 class="product-name">Noir Silhouette Midi Dress</h3>
-                <!-- Size selector (disabled) -->
-                <div class="size-selector">
-                    <div class="size-selector-head">
-                        <span class="size-label">Select Size</span>
-                        <a href="#" onclick="openInfoModal('size-guide');return false;" class="size-guide-link">Size Guide</a>
-                    </div>
-                    <div class="size-options">
-                        <button class="size-btn unavailable" disabled>XS</button>
-                        <button class="size-btn unavailable" disabled>S</button>
-                        <button class="size-btn unavailable" disabled>M</button>
-                        <button class="size-btn unavailable" disabled>L</button>
-                        <button class="size-btn unavailable" disabled>XL</button>
-                        <button class="size-btn unavailable" disabled>2XL</button>
-                        <button class="size-btn unavailable" disabled>3XL</button>
-                    </div>
-                </div>
-                <div class="product-foot">
-                    <span class="product-price">GHS 850</span>
-                    <button class="restock-btn" onclick="openRestock('Noir Silhouette Midi Dress')">Request Restock</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ④ Scarlet Evening Gown — IN STOCK -->
-        <div class="product-card reveal reveal-delay-2" data-product="Scarlet Evening Gown" data-category="woman">
-            <div class="product-img-wrap">
-                <img src="6a01731e-5696-4a96-9ac6-820fdc9c74c6.JPG" alt="Scarlet Evening Gown" loading="lazy">
-            </div>
-            <div class="product-info">
-                <p class="product-cat">Couture · Womenswear</p>
-                <h3 class="product-name">Scarlet Evening Gown</h3>
-                <div class="size-selector">
-                    <div class="size-selector-head">
-                        <span class="size-label">Select Size</span>
-                        <a href="#" onclick="openInfoModal('size-guide');return false;" class="size-guide-link">Size Guide</a>
-                    </div>
-                    <div class="size-options">
-                        <button class="size-btn" onclick="selectSize(this)">XS</button>
-                        <button class="size-btn" onclick="selectSize(this)">S</button>
-                        <button class="size-btn" onclick="selectSize(this)">M</button>
-                        <button class="size-btn" onclick="selectSize(this)">L</button>
-                        <button class="size-btn" onclick="selectSize(this)">XL</button>
-                        <button class="size-btn" onclick="selectSize(this)">2XL</button>
-                        <button class="size-btn" onclick="selectSize(this)">3XL</button>
-                    </div>
-                    <p class="size-hint" id="hint-4">Please select a size before ordering.</p>
-                </div>
-                <div class="product-foot">
-                    <span class="product-price">GHS 1,600</span>
-                    <button class="add-to-cart-btn" onclick="addToCart(this,'hint-4','Scarlet Evening Gown',1600,'6a01731e-5696-4a96-9ac6-820fdc9c74c6.JPG')">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ⑤ Red Carpet Statement Dress — OUT OF STOCK -->
-        <div class="product-card oos reveal reveal-delay-3" data-product="Red Carpet Statement Dress" data-category="woman">
-            <div class="product-img-wrap">
-                <img src="7783bb7f-84b7-4df9-9d0c-db588b7f1a5a.JPG" alt="Red Carpet Statement" loading="lazy">
-                <span class="oos-badge">Out of Stock</span>
-            </div>
-            <div class="product-info">
-                <p class="product-cat">Couture · Womenswear</p>
-                <h3 class="product-name">Red Carpet Statement Dress</h3>
-                <div class="size-selector">
-                    <div class="size-selector-head">
-                        <span class="size-label">Select Size</span>
-                        <a href="#" onclick="openInfoModal('size-guide');return false;" class="size-guide-link">Size Guide</a>
-                    </div>
-                    <div class="size-options">
-                        <button class="size-btn unavailable" disabled>XS</button>
-                        <button class="size-btn unavailable" disabled>S</button>
-                        <button class="size-btn unavailable" disabled>M</button>
-                        <button class="size-btn unavailable" disabled>L</button>
-                        <button class="size-btn unavailable" disabled>XL</button>
-                        <button class="size-btn unavailable" disabled>2XL</button>
-                        <button class="size-btn unavailable" disabled>3XL</button>
-                    </div>
-                </div>
-                <div class="product-foot">
-                    <span class="product-price">GHS 1,500</span>
-                    <button class="restock-btn" onclick="openRestock('Red Carpet Statement Dress')">Request Restock</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-<!-- ══════════════════ LOOKBOOK SETS ══════════════════ -->
-<section id="before-sunset" class="section" style="background:#0d0808;padding-top:80px;padding-bottom:80px;">
-
-    <div class="col-header reveal" style="margin-bottom:56px;">
-        <div>
-            <p class="col-eyebrow" style="color:#FBCEB1;">Nostalgia In Time</p>
-            <h2 class="col-title" style="color:#fff;">The <em>Sets</em></h2>
-        </div>
-        <p class="col-sub" style="color:rgba(255,255,255,0.4);">Swipe to explore · Click to expand</p>
     </div>
 
     <!-- ═══ LOOKBOOK CARDS GRID — add more .lk-card blocks below for new sets ═══ -->
     <div class="lk-grid">
 
         <!-- SET 01 — Before Sunset -->
-        <div class="lk-card reveal" data-set-name="Before Sunset" data-wa-text="Before%20Sunset%20Co-ord%20Set">
+        <div class="lk-card reveal reveal-delay-1" data-set-name="Before Sunset" data-wa-text="Before%20Sunset%20Co-ord%20Set">
             <div class="lk-carousel">
                 <div class="lk-track">
-                    <div class="lk-slide"><img src="Before Sunset/A.N_11.jpg" alt="Before Sunset" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_11.jpg" alt="Before Sunset" loading="eager"></div>
                     <div class="lk-slide"><img src="Before Sunset/A.N_15.jpg" alt="Before Sunset" loading="lazy"></div>
                     <div class="lk-slide"><img src="Before Sunset/A.N_19.jpg" alt="Before Sunset" loading="lazy"></div>
                     <div class="lk-slide"><img src="Before Sunset/A.N_21.jpg" alt="Before Sunset" loading="lazy"></div>
@@ -3612,21 +3442,15 @@
                     <div class="lk-slide"><img src="Before Sunset/A.N_63.jpg" alt="Before Sunset" loading="lazy"></div>
                     <div class="lk-slide"><img src="Before Sunset/A.N_74.jpg" alt="Before Sunset" loading="lazy"></div>
                 </div>
-                <!-- Badge -->
                 <span class="lk-badge">New Collection</span>
-                <!-- Counter -->
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">8</span></span>
-                <!-- Arrows -->
                 <button class="lk-arrow lk-prev" aria-label="Previous">&#8249;</button>
                 <button class="lk-arrow lk-next" aria-label="Next">&#8250;</button>
-                <!-- Expand hint -->
                 <button class="lk-expand-btn" aria-label="View all images">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
                 </button>
             </div>
-            <!-- Dots -->
             <div class="lk-dots"></div>
-            <!-- Info -->
             <div class="lk-info">
                 <div>
                     <p class="lk-eyebrow">Womenswear · Co-ord Set</p>
@@ -3636,7 +3460,7 @@
             </div>
         </div>
 
-        <!-- ADD MORE SETS HERE — duplicate the block above and change images + names -->
+        <!-- ADD MORE SETS HERE — duplicate the .lk-card block above and swap image paths + names -->
 
     </div>
 </section>
@@ -4709,64 +4533,18 @@
 
     // ── CATEGORY FILTER ──
     function showCategory(cat) {
-        const labels = { man: 'The Aura Man', woman: 'The Aura Woman', accessories: 'Accessories' };
-
-        // Coming soon categories — always show the coming soon overlay
+        // All categories except woman scroll to collections then open coming soon
         if (cat === 'man' || cat === 'accessories') {
-            openComingSoon(labels[cat]);
+            openComingSoon(cat === 'man' ? 'The Aura Man' : 'Accessories');
             return;
         }
-
-        const cards = document.querySelectorAll('.product-card');
-        const eyebrow = document.getElementById('collections-eyebrow');
-        const title = document.getElementById('collections-title');
-        const clearBtn = document.getElementById('clear-filter-btn');
-
-        let found = 0;
-        cards.forEach(card => {
-            if (card.dataset.category === cat) {
-                card.style.display = '';
-                found++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
-
-        if (found === 0) {
-            // No products yet — show a "coming soon" message
-            let msg = document.getElementById('cat-empty-msg');
-            if (!msg) {
-                msg = document.createElement('div');
-                msg.id = 'cat-empty-msg';
-                msg.style.cssText = 'grid-column:1/-1;text-align:center;padding:60px 20px;';
-                msg.innerHTML = `<p style="font-family:\'Cormorant Garamond\',serif;font-size:28px;font-style:italic;color:var(--crimson);margin-bottom:10px;">Coming Soon</p><p style="font-size:12px;letter-spacing:1.5px;color:#888;text-transform:uppercase;">The ${labels[cat]} collection is being curated.</p>`;
-                document.querySelector('.products-grid').appendChild(msg);
-            }
-            msg.style.display = 'block';
-        } else {
-            const msg = document.getElementById('cat-empty-msg');
-            if (msg) msg.style.display = 'none';
-        }
-
-        if (eyebrow) eyebrow.textContent = labels[cat] || 'Collections';
-        if (title) title.innerHTML = labels[cat] === 'Accessories' ? '<em>Accessories</em>' : labels[cat].replace('The ', 'The <em>') + '</em>';
-        if (clearBtn) clearBtn.style.display = 'block';
-
-        // Scroll to collections
-        document.getElementById('collections').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // woman → scroll to collections section
+        const sec = document.getElementById('collections');
+        if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function clearCategoryFilter() {
-        const cards = document.querySelectorAll('.product-card');
-        cards.forEach(card => { card.style.display = ''; });
-        const msg = document.getElementById('cat-empty-msg');
-        if (msg) msg.style.display = 'none';
-        const eyebrow = document.getElementById('collections-eyebrow');
-        const title = document.getElementById('collections-title');
-        const clearBtn = document.getElementById('clear-filter-btn');
-        if (eyebrow) eyebrow.textContent = 'Featured Pieces';
-        if (title) title.innerHTML = 'Nostalgia <em>In Time</em>';
-        if (clearBtn) clearBtn.style.display = 'none';
+        // no-op — kept for backward compatibility
     }
 
     // ── POPUP LOGIC ──

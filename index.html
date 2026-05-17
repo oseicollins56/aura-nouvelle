@@ -619,78 +619,6 @@
             border-color: var(--crimson);
         }
 
-        /* ── CATEGORIES ── */
-        #categories {
-            background: white;
-        }
-
-        #categories .col-header { margin-bottom: 50px; }
-
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-        }
-
-        .cat-card {
-            position: relative;
-            height: 380px;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .cat-card img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: top;
-            transition: transform 0.5s ease;
-        }
-
-        .cat-card:hover img { transform: scale(1.08); }
-
-        .cat-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 55%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 28px;
-        }
-
-        .cat-label {
-            font-size: 9px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--apricot);
-            margin-bottom: 8px;
-        }
-
-        .cat-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            font-weight: 400;
-            color: white;
-        }
-
-        .cat-arrow {
-            margin-top: 12px;
-            font-size: 9.5px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
-            opacity: 0;
-            transform: translateY(6px);
-            transition: all 0.3s;
-        }
-
-        .cat-card:hover .cat-arrow {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* ── ABOUT ── */
         #about {
             background: var(--dark-2);
@@ -2460,7 +2388,6 @@
             #about { grid-template-columns: 1fr; }
             .about-gallery { display: none; }
             .about-text-wrap { padding: 72px 30px; }
-            .categories-grid { grid-template-columns: 1fr 1fr; }
             .faq-wrap { grid-template-columns: 1fr; gap: 0; }
             .delivery-row { grid-template-columns: 1fr; }
             .hero-content { padding: 0 24px; }
@@ -2474,7 +2401,6 @@
             .hero-content { padding: 0 20px; }
             .hero-actions { flex-direction: column; align-items: center; }
             .products-grid { grid-template-columns: 1fr; }
-            .categories-grid { grid-template-columns: 1fr; }
             .order-grid { grid-template-columns: 1fr; }
             .contact-btns { flex-direction: column; align-items: center; }
             .contact-info-grid { flex-direction: column; gap: 28px; }
@@ -3192,15 +3118,13 @@
 <nav id="navbar">
     <ul class="nav-links">
         <li class="cat-nav-wrap">
-            <a href="#categories" id="catNavTrigger" onclick="toggleCatDropdown(event)">Categories<span class="cat-nav-chevron">▾</span></a>
+            <a href="#" id="catNavTrigger" onclick="toggleCatDropdown(event)">Collections<span class="cat-nav-chevron">▾</span></a>
             <div class="cat-nav-dropdown" id="catNavDropdown">
-                <a href="#" onclick="scrollToCategories(0);return false;">The Aura Man</a>
-                <a href="#" onclick="scrollToCategories(1);return false;">The Aura Woman</a>
-                <a href="#before-sunset" onclick="closeCatDropdown();return false;">Before Sunset</a>
-                <a href="#" onclick="scrollToCategories(2);return false;">Accessories</a>
+                <a href="#" onclick="openComingSoon('The Aura Man');closeCatDropdown();return false;">The Aura Man</a>
+                <a href="#collections" onclick="closeCatDropdown();return false;">The Aura Woman</a>
+                <a href="#" onclick="openComingSoon('Accessories');closeCatDropdown();return false;">Accessories</a>
             </div>
         </li>
-        <li><a href="#editorial">Editorial</a></li>
         <li><a href="#" onclick="openInfoModal('about');return false;">About</a></li>
         <li><a href="#" onclick="openInfoModal('size-guide');return false;">Size Guide</a></li>
         <li><a href="#" onclick="openInfoModal('giftcards');return false;">Gift Cards</a></li>
@@ -3236,7 +3160,7 @@
 <!-- Mobile Menu -->
 <div id="mobileMenu">
     <ul>
-        <li><a href="#categories" onclick="closeMenu()">Categories</a></li>
+        <li><a href="#collections" onclick="closeMenu()">Collections</a></li>
         <li><a href="#" onclick="openInfoModal('about');closeMenu();return false;">About</a></li>
         <li><a href="#" onclick="openInfoModal('size-guide');closeMenu();return false;">Size Guide</a></li>
         <li><a href="#" onclick="openInfoModal('giftcards');closeMenu();return false;">Gift Cards</a></li>
@@ -3433,14 +3357,14 @@
         <div class="lk-card reveal reveal-delay-1" data-set-name="Before Sunset" data-wa-text="Before%20Sunset%20Co-ord%20Set">
             <div class="lk-carousel">
                 <div class="lk-track">
-                    <div class="lk-slide"><img src="Before Sunset/A.N_11.jpg" alt="Before Sunset" loading="eager"></div>
-                    <div class="lk-slide"><img src="Before Sunset/A.N_15.jpg" alt="Before Sunset" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Before Sunset/A.N_19.jpg" alt="Before Sunset" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Before Sunset/A.N_21.jpg" alt="Before Sunset" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Before Sunset/A.N_22.jpg" alt="Before Sunset" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Before Sunset/A.N_25.jpg" alt="Before Sunset" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Before Sunset/A.N_63.jpg" alt="Before Sunset" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Before Sunset/A.N_74.jpg" alt="Before Sunset" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_11.jpg" alt="Before Sunset" loading="eager" decoding="async" fetchpriority="high"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_15.jpg" alt="Before Sunset" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_19.jpg" alt="Before Sunset" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_21.jpg" alt="Before Sunset" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_22.jpg" alt="Before Sunset" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_25.jpg" alt="Before Sunset" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_63.jpg" alt="Before Sunset" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Before Sunset/A.N_74.jpg" alt="Before Sunset" loading="lazy" decoding="async"></div>
                 </div>
                 <span class="lk-badge">New Collection</span>
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">8</span></span>
@@ -3464,10 +3388,10 @@
         <div class="lk-card reveal reveal-delay-2" data-set-name="Élan" data-wa-text="Elan%20Co-ord%20Set">
             <div class="lk-carousel">
                 <div class="lk-track">
-                    <div class="lk-slide"><img src="Elan/A.N_135.jpg" alt="Élan" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Elan/A.N_139.jpg" alt="Élan" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Elan/A.N_143.jpg" alt="Élan" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Elan/A.N_144.jpg" alt="Élan" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Elan/A.N_135.jpg" alt="Élan" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Elan/A.N_139.jpg" alt="Élan" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Elan/A.N_143.jpg" alt="Élan" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Elan/A.N_144.jpg" alt="Élan" loading="lazy" decoding="async"></div>
                 </div>
                 <span class="lk-badge">New Collection</span>
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">4</span></span>
@@ -3491,10 +3415,10 @@
         <div class="lk-card reveal reveal-delay-3" data-set-name="Whisper" data-wa-text="Whisper%20Co-ord%20Set">
             <div class="lk-carousel">
                 <div class="lk-track">
-                    <div class="lk-slide"><img src="Whisper/A.N_112.jpg" alt="Whisper" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Whisper/A.N_115.jpg" alt="Whisper" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Whisper/A.N_119.jpg" alt="Whisper" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Whisper/A.N_125.jpg" alt="Whisper" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Whisper/A.N_112.jpg" alt="Whisper" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Whisper/A.N_115.jpg" alt="Whisper" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Whisper/A.N_119.jpg" alt="Whisper" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Whisper/A.N_125.jpg" alt="Whisper" loading="lazy" decoding="async"></div>
                 </div>
                 <span class="lk-badge">New Collection</span>
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">4</span></span>
@@ -3518,9 +3442,9 @@
         <div class="lk-card reveal reveal-delay-4" data-set-name="Saint" data-wa-text="Saint%20Collection">
             <div class="lk-carousel">
                 <div class="lk-track">
-                    <div class="lk-slide"><img src="Saint/A.N_76.jpg" alt="Saint" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Saint/A.N_84.jpg" alt="Saint" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Saint/A.N_102.jpg" alt="Saint" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Saint/A.N_76.jpg" alt="Saint" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Saint/A.N_84.jpg" alt="Saint" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Saint/A.N_102.jpg" alt="Saint" loading="lazy" decoding="async"></div>
                 </div>
                 <span class="lk-badge">New Collection</span>
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">3</span></span>
@@ -3544,8 +3468,8 @@
         <div class="lk-card reveal reveal-delay-1" data-set-name="Madonna" data-wa-text="Madonna%20Collection">
             <div class="lk-carousel">
                 <div class="lk-track">
-                    <div class="lk-slide"><img src="Madonna/A.N_170.jpg" alt="Madonna" loading="lazy"></div>
-                    <div class="lk-slide"><img src="Madonna/A.N_174.jpg" alt="Madonna" loading="lazy"></div>
+                    <div class="lk-slide"><img src="Madonna/A.N_170.jpg" alt="Madonna" loading="lazy" decoding="async"></div>
+                    <div class="lk-slide"><img src="Madonna/A.N_174.jpg" alt="Madonna" loading="lazy" decoding="async"></div>
                 </div>
                 <span class="lk-badge">New Collection</span>
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">2</span></span>
@@ -3638,43 +3562,6 @@
     </div>
 </section>
 
-<!-- ══════════════════ CATEGORIES ══════════════════ -->
-<section class="section" id="categories">
-    <div class="col-header reveal">
-        <div>
-            <span class="section-eyebrow">Browse by Line</span>
-            <h2 class="section-title">Shop by <em>Category</em></h2>
-        </div>
-        <a href="https://wa.me/233246131857?text=Hello!%20I'd%20like%20to%20browse%20available%20pieces." target="_blank" class="link-arrow">All Categories &rarr;</a>
-    </div>
-
-    <div class="categories-grid" style="grid-template-columns:repeat(3,1fr);">
-        <div class="cat-card reveal reveal-delay-1" onclick="showCategory('man')" style="cursor:pointer;">
-            <img src="4f302c80-d04f-4ee3-8d54-83339ddf3889.JPG" alt="The Aura Man" loading="lazy">
-            <div class="cat-overlay">
-                <span class="cat-label">Menswear</span>
-                <span class="cat-name">The Aura Man</span>
-                <span class="cat-arrow">Shop Now →</span>
-            </div>
-        </div>
-        <div class="cat-card reveal reveal-delay-2" onclick="showCategory('woman')" style="cursor:pointer;">
-            <img src="859bf37b-5f78-41c2-a3e1-84aa4dc8dd6b.JPG" alt="The Aura Woman" loading="lazy">
-            <div class="cat-overlay">
-                <span class="cat-label">Womenswear</span>
-                <span class="cat-name">The Aura Woman</span>
-                <span class="cat-arrow">Shop Now →</span>
-            </div>
-        </div>
-        <div class="cat-card reveal reveal-delay-3" onclick="showCategory('accessories')" style="cursor:pointer;">
-            <img src="45f3f35a-1f7a-412e-9128-26cb46b681ab.JPG" alt="Accessories" loading="lazy">
-            <div class="cat-overlay">
-                <span class="cat-label">Lifestyle &amp; Accessories</span>
-                <span class="cat-name">Accessories</span>
-                <span class="cat-arrow">Shop Now →</span>
-            </div>
-        </div>
-    </div>
-</section>
 
 
 <!-- ══════════════════ EDITORIAL QUOTE ══════════════════ -->
@@ -3784,11 +3671,9 @@
             <h5>Shop</h5>
             <ul>
                 <li><a href="#collections">New Arrivals</a></li>
-                <li><a href="#" onclick="scrollToCategories(1);closeMenu();return false;">The Aura Woman</a></li>
-                <li><a href="#" onclick="scrollToCategories(0);closeMenu();return false;">The Aura Man</a></li>
-                <li><a href="#before-sunset" onclick="closeMenu()">Before Sunset</a></li>
-                <li><a href="#" onclick="scrollToCategories(2);closeMenu();return false;">Accessories</a></li>
-                <li><a href="#categories" onclick="closeMenu()">Lifestyle</a></li>
+                <li><a href="#collections">The Aura Woman</a></li>
+                <li><a href="#" onclick="openComingSoon('The Aura Man');return false;">The Aura Man</a></li>
+                <li><a href="#" onclick="openComingSoon('Accessories');return false;">Accessories</a></li>
             </ul>
         </div>
 
@@ -4957,19 +4842,10 @@
     }
 
     function scrollToCategories(index) {
-        const section = document.getElementById('categories');
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
-            const cards = section.querySelectorAll('.cat-card');
-            if (cards[index]) {
-                setTimeout(() => {
-                    cards[index].style.outline = '2px solid var(--crimson)';
-                    setTimeout(() => cards[index].style.outline = '', 1800);
-                }, 600);
-            }
-        }
-        document.getElementById('catNavDropdown').classList.remove('open');
-        document.getElementById('catNavTrigger').classList.remove('active');
+        // Categories section removed — scroll to collections instead
+        const section = document.getElementById('collections');
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+        closeCatDropdown();
     }
 
     // Close categories dropdown when clicking outside

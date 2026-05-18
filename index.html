@@ -2414,6 +2414,10 @@
             .lk-grid { gap: 24px; }
             /* Cart panel full width on tablet */
             #cart-panel { width: 100%; max-width: 100%; }
+            /* Hero video: fill frame on portrait screens — no black bars */
+            .hero-bg video { object-fit: cover; }
+            /* Button sits higher on mobile */
+            #hero { padding-bottom: 52px; }
         }
 
         @media (max-width: 640px) {

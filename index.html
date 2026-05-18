@@ -2414,15 +2414,20 @@
             .lk-grid { gap: 24px; }
             /* Cart panel full width on tablet */
             #cart-panel { width: 100%; max-width: 100%; }
-            /* Hero video: fill frame on portrait screens — no black bars */
-            .hero-bg video { object-fit: cover; }
-            /* Button sits higher on mobile */
-            #hero { padding-bottom: 52px; }
+            /* Hero: fit exactly to the visible screen — no overflow, no black bars */
+            #hero {
+                height: 100vh;
+                height: 100svh; /* stable viewport height — excludes browser chrome */
+                min-height: unset; /* override the 680px base min that overflows small phones */
+                padding-bottom: 52px;
+            }
+            .hero-bg video { object-fit: cover; object-position: center center; }
         }
 
         @media (max-width: 640px) {
             .section, #contact, footer { padding: 60px 22px; }
             .hero-content { padding: 0 20px; }
+            #hero { padding-bottom: 80px; } /* button comfortably above bottom edge */
             .hero-actions { flex-direction: column; align-items: center; }
             .products-grid { grid-template-columns: 1fr; }
             .order-grid { grid-template-columns: 1fr; }

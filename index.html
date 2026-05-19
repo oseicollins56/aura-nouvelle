@@ -3374,7 +3374,7 @@
             <div class="checkout-order-summary" id="checkoutSummary"></div>
             <span class="checkout-section-title">Delivery Details</span>
             <input type="text" class="co-input" id="co-name" placeholder="Full name" autocomplete="name">
-            <input type="tel" class="co-input" id="co-phone" placeholder="WhatsApp number (+233…)" autocomplete="tel">
+            <input type="tel" class="co-input" id="co-phone" placeholder="Contact number (+233…)" autocomplete="tel">
             <input type="email" class="co-input" id="co-email" placeholder="Email address" autocomplete="email">
             <input type="text" class="co-input" id="co-address" placeholder="Delivery address / city">
             <span class="checkout-section-title">Payment Method</span>
@@ -4665,7 +4665,7 @@
         const email = document.getElementById('co-email').value.trim();
         const address = document.getElementById('co-address').value.trim();
         const payment = document.querySelector('input[name="payment"]:checked').value;
-        if (!name || !phone) { showToast('Please fill in your name and WhatsApp number.'); return; }
+        if (!name || !phone) { showToast('Please fill in your name and contact number.'); return; }
 
         const raw = getCartTotal();
         const disc = Math.min(appliedGCValue, raw);

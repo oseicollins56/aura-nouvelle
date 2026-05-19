@@ -4734,7 +4734,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    access_key: 'REPLACE_WITH_YOUR_WEB3FORMS_KEY',
+                    access_key: '1fc06947-1563-4054-8721-8d9499da4372',
                     subject: subject,
                     from_name: 'Aura Nouvelle Store',
                     email: 'info.auranouvelle@gmail.com',
@@ -4925,11 +4925,25 @@
             return;
         }
 
+        const size = sizeBtn ? sizeBtn.textContent.trim() : 'Not specified';
         // Show success screen inside modal
         document.querySelector('.restock-body').style.display = 'none';
         document.getElementById('restock-confirmed-contact').textContent = contact;
         document.getElementById('restock-confirmed-piece').textContent = currentRestockProduct;
         document.getElementById('restock-success').style.display = 'block';
+        // Notify via Web3Forms (fire & forget)
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                access_key: '1fc06947-1563-4054-8721-8d9499da4372',
+                subject: `Restock Request: ${currentRestockProduct} — ${name}`,
+                from_name: 'Aura Nouvelle Website',
+                email: 'info.auranouvelle@gmail.com',
+                message: `Restock Request:\n\nPiece: ${currentRestockProduct}\nSize: ${size}\nName: ${name}\nContact: ${contact}`,
+                botcheck: false
+            })
+        }).catch(() => {});
     }
 
     // ── CATEGORY FILTER ──
@@ -4961,11 +4975,27 @@
         e.preventDefault();
         const name = document.getElementById('pop-name').value.trim();
         const email = document.getElementById('pop-email').value.trim();
-        // Show success
+        const mm = document.getElementById('pop-mm') ? document.getElementById('pop-mm').value.trim() : '';
+        const dd = document.getElementById('pop-dd') ? document.getElementById('pop-dd').value.trim() : '';
+        const birthday = (mm && dd) ? `${mm}/${dd}` : 'Not provided';
+        // Show success immediately
         document.getElementById('popup-form-wrap').style.display = 'none';
         document.getElementById('popup-success').style.display = 'block';
         // Auto-close after 3.5s
         setTimeout(closePopup, 3500);
+        // Send to email via Web3Forms (fire & forget)
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                access_key: '1fc06947-1563-4054-8721-8d9499da4372',
+                subject: `New Subscriber: ${name}`,
+                from_name: 'Aura Nouvelle Website',
+                email: 'info.auranouvelle@gmail.com',
+                message: `New newsletter subscriber:\n\nName: ${name}\nEmail: ${email}\nBirthday: ${birthday}`,
+                botcheck: false
+            })
+        }).catch(() => {});
     }
 
     // Popup always shows on every visit

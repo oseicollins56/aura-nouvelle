@@ -3799,6 +3799,8 @@
                 </div>
                 <span class="lk-badge">Accessories</span>
                 <span class="lk-counter"><span class="lk-cur">1</span> / <span class="lk-total">1</span></span>
+                <button class="lk-arrow lk-prev" aria-label="Previous">&#8249;</button>
+                <button class="lk-arrow lk-next" aria-label="Next">&#8250;</button>
             </div>
             <div class="lk-dots"></div>
             <div class="lk-info">
@@ -4276,8 +4278,8 @@
                 if (curEl) curEl.textContent = idx + 1;
             }
 
-            prev.onclick = e => { e.stopPropagation(); goTo(idx - 1); };
-            next.onclick = e => { e.stopPropagation(); goTo(idx + 1); };
+            if (prev) prev.onclick = e => { e.stopPropagation(); goTo(idx - 1); };
+            if (next) next.onclick = e => { e.stopPropagation(); goTo(idx + 1); };
 
             // Touch / swipe
             let tx = 0;

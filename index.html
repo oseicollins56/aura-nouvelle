@@ -61,31 +61,23 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         /* ── COPYRIGHT PROTECTION ── */
-        body, body * {
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
+        /* Block text selection everywhere except form fields */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
-        /* Allow selection inside form inputs so users can type normally */
         input, textarea, select {
             -webkit-user-select: text !important;
             -moz-user-select: text !important;
             -ms-user-select: text !important;
             user-select: text !important;
         }
+        /* Prevent image dragging via CSS (JS also handles this) */
         img {
-            -webkit-user-drag: none !important;
-            user-drag: none !important;
-            pointer-events: none;
-        }
-        /* Re-enable pointer events on interactive elements */
-        a, button, input, textarea, select, label,
-        .lk-carousel, .lk-arrow, .lk-dot, .lk-cart-btn,
-        .wa-float, .nav-link, .cart-icon-wrap, .navbar,
-        .co-input, .pay-option, .place-order-btn,
-        .faq-item, .im-faq-head, [onclick] {
-            pointer-events: auto !important;
+            -webkit-user-drag: none;
+            user-drag: none;
         }
 
         /* scroll-behavior managed per-call via JS, not globally */
@@ -5444,12 +5436,12 @@
         return false;
     });
 
-    // 5. Disable long-press save on mobile (image touch-hold)
-    document.addEventListener('touchstart', function(e) {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
-        }
-    }, { passive: false });
+    // 5. Disable long-press save on mobile via CSS touch-action (JS preventDefault on
+    //    touchstart blocks click events on mobile, so we avoid it here)
+    document.querySelectorAll('img').forEach(function(img) {
+        img.addEventListener('touchstart', function(e) { e.preventDefault(); }, { passive: false });
+        img.style.webkitTouchCallout = 'none';
+    });
 
     // 6. Add © watermark to console as a deterrent
     const y = new Date().getFullYear();

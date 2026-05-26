@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Aura Nouvelle v2.2 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,6 +60,33 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* ── COPYRIGHT PROTECTION ── */
+        body, body * {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+        }
+        /* Allow selection inside form inputs so users can type normally */
+        input, textarea, select {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+        }
+        img {
+            -webkit-user-drag: none !important;
+            user-drag: none !important;
+            pointer-events: none;
+        }
+        /* Re-enable pointer events on interactive elements */
+        a, button, input, textarea, select, label,
+        .lk-carousel, .lk-arrow, .lk-dot, .lk-cart-btn,
+        .wa-float, .nav-link, .cart-icon-wrap, .navbar,
+        .co-input, .pay-option, .place-order-btn,
+        .faq-item, .im-faq-head, [onclick] {
+            pointer-events: auto !important;
+        }
 
         /* scroll-behavior managed per-call via JS, not globally */
 
@@ -1376,16 +1402,16 @@
             background: rgba(10,5,5,0.7);
             backdrop-filter: blur(5px);
             z-index: 9998;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
             opacity: 0;
+            pointer-events: none;
             transition: opacity 0.3s;
         }
 
         #restock-overlay.open {
-            display: flex;
             opacity: 1;
             pointer-events: all;
         }
@@ -1559,13 +1585,13 @@
             background: rgba(10,5,5,0.92);
             backdrop-filter: blur(8px);
             z-index: 10000;
-            display: none; flex-direction: column;
+            display: flex; flex-direction: column;
             align-items: center; justify-content: flex-start;
             padding: 120px 40px 40px;
-            opacity: 0;
+            opacity: 0; pointer-events: none;
             transition: opacity 0.3s;
         }
-        #search-overlay.open { display: flex; opacity: 1; pointer-events: all; }
+        #search-overlay.open { opacity: 1; pointer-events: all; }
         .search-close-btn {
             position: absolute; top: 36px; right: 44px;
             background: none; border: none;
@@ -1650,10 +1676,10 @@
         #cart-backdrop {
             position: fixed; inset: 0;
             background: rgba(0,0,0,0.45);
-            z-index: 9996; display: none; opacity: 0;
+            z-index: 9996; opacity: 0; pointer-events: none;
             transition: opacity 0.3s;
         }
-        #cart-backdrop.open { display: block; opacity: 1; pointer-events: all; }
+        #cart-backdrop.open { opacity: 1; pointer-events: all; }
         .cart-header {
             padding: 24px 28px; border-bottom: 1px solid #f0ece6;
             display: flex; justify-content: space-between; align-items: center;
@@ -1777,11 +1803,11 @@
         #checkout-overlay {
             position: fixed; inset: 0;
             background: rgba(10,5,5,0.7); backdrop-filter: blur(5px);
-            z-index: 9998; display: none;
+            z-index: 9998; display: flex;
             align-items: center; justify-content: center; padding: 20px;
-            opacity: 0; transition: opacity 0.3s;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
         }
-        #checkout-overlay.open { display: flex; opacity: 1; pointer-events: all; }
+        #checkout-overlay.open { opacity: 1; pointer-events: all; }
         #checkout-card {
             background: white; width: 100%; max-width: 520px;
             max-height: 90vh; overflow-y: auto;
@@ -2143,18 +2169,20 @@
             background: rgba(10,5,5,0.72);
             backdrop-filter: blur(6px);
             z-index: 9999;
-            display: none;
+            display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
             opacity: 0;
-            transition: opacity 0.45s ease;
+            animation: popOverlayIn 0.5s 1.8s forwards;
         }
-        #popup-overlay.an-active {
-            display: flex;
+
+        #popup-overlay.hidden {
+            display: none !important;
         }
-        #popup-overlay.an-visible {
-            opacity: 1;
+
+        @keyframes popOverlayIn {
+            to { opacity: 1; }
         }
 
         #popup-card {
@@ -2487,15 +2515,16 @@
             inset: 0;
             background: rgba(17,17,17,0.78);
             z-index: 9990;
-            display: none;
+            display: flex;
             align-items: flex-start;
             justify-content: center;
             opacity: 0;
+            pointer-events: none;
             transition: opacity 0.35s;
             padding: 60px 20px 20px;
             overflow-y: auto;
         }
-        #info-modal-overlay.open { display: flex; opacity: 1; pointer-events: all; }
+        #info-modal-overlay.open { opacity: 1; pointer-events: all; }
         #info-modal-box {
             background: var(--white);
             width: 100%;
@@ -2737,7 +2766,7 @@
             cursor: pointer;
             z-index: 5;
             transition: background 0.2s, opacity 0.2s;
-            opacity: 0.75;
+            opacity: 0;
             line-height: 1;
             padding: 0;
         }
@@ -4426,16 +4455,12 @@
     // SEARCH
     // ══════════════════════════════════════════
     function openSearch() {
-        var so = document.getElementById('search-overlay');
-        so.style.display = 'flex';
-        requestAnimationFrame(function() { so.classList.add('open'); });
+        document.getElementById('search-overlay').classList.add('open');
         document.body.style.overflow = 'hidden';
-        setTimeout(function() { document.getElementById('search-input').focus(); }, 100);
+        setTimeout(() => document.getElementById('search-input').focus(), 100);
     }
     function closeSearch() {
-        var so = document.getElementById('search-overlay');
-        so.classList.remove('open');
-        setTimeout(function() { so.style.display = 'none'; }, 310);
+        document.getElementById('search-overlay').classList.remove('open');
         document.body.style.overflow = '';
         document.getElementById('search-input').value = '';
         document.getElementById('searchResults').innerHTML = '<p class="search-hint">Start typing to search the collection…</p>';
@@ -4562,21 +4587,13 @@
         const panel = document.getElementById('cart-panel');
         const backdrop = document.getElementById('cart-backdrop');
         const isOpen = panel.classList.toggle('open');
-        if (isOpen) {
-            backdrop.style.display = 'block';
-            requestAnimationFrame(function() { backdrop.classList.add('open'); });
-        } else {
-            backdrop.classList.remove('open');
-            setTimeout(function() { backdrop.style.display = 'none'; }, 310);
-        }
+        backdrop.classList.toggle('open', isOpen);
         document.body.style.overflow = isOpen ? 'hidden' : '';
     }
 
     function closeCart() {
         document.getElementById('cart-panel').classList.remove('open');
-        var backdrop = document.getElementById('cart-backdrop');
-        backdrop.classList.remove('open');
-        setTimeout(function() { backdrop.style.display = 'none'; }, 310);
+        document.getElementById('cart-backdrop').classList.remove('open');
         document.body.style.overflow = '';
     }
 
@@ -4618,17 +4635,13 @@
         (disc > 0 ? `<div class="checkout-order-item" style="color:#27ae60"><span>Gift Card (${appliedGCCode})</span><span>− GHS ${disc.toLocaleString()}</span></div>` : '') +
         `<div class="checkout-order-total"><span>Total</span><span>GHS ${final.toLocaleString()}</span></div>`;
         closeCart();
-        var co = document.getElementById('checkout-overlay');
-        co.style.display = 'flex';
-        requestAnimationFrame(function() { co.classList.add('open'); });
+        document.getElementById('checkout-overlay').classList.add('open');
         document.body.style.overflow = 'hidden';
         updatePayNowAmount();
     }
 
     function closeCheckout() {
-        var co = document.getElementById('checkout-overlay');
-        co.classList.remove('open');
-        setTimeout(function() { co.style.display = 'none'; }, 310);
+        document.getElementById('checkout-overlay').classList.remove('open');
         document.body.style.overflow = '';
         // Reset to form view
         const form = document.querySelector('#checkout-card .checkout-body:not(#order-confirmation)');
@@ -4942,16 +4955,12 @@
         document.getElementById('restock-contact').value = '';
         // Clear size selection
         document.querySelectorAll('.restock-size-btn').forEach(b => b.classList.remove('selected'));
-        var ro = document.getElementById('restock-overlay');
-        ro.style.display = 'flex';
-        requestAnimationFrame(function() { ro.classList.add('open'); });
+        document.getElementById('restock-overlay').classList.add('open');
         document.body.style.overflow = 'hidden';
     }
 
     function closeRestock() {
-        var ro = document.getElementById('restock-overlay');
-        ro.classList.remove('open');
-        setTimeout(function() { ro.style.display = 'none'; }, 310);
+        document.getElementById('restock-overlay').classList.remove('open');
         document.body.style.overflow = '';
         // Reset screens for next open
         setTimeout(() => {
@@ -5022,24 +5031,13 @@
     }
 
     // ── POPUP LOGIC ──
+    // Check if already seen (remember for 7 days)
     function closePopup() {
         const overlay = document.getElementById('popup-overlay');
-        overlay.classList.remove('an-visible');
-        setTimeout(function() {
-            overlay.classList.remove('an-active');
-        }, 460);
+        overlay.style.transition = 'opacity 0.35s ease';
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.classList.add('hidden'), 350);
     }
-
-    // Show popup after 1.8s — display:none by default so it NEVER blocks clicks
-    setTimeout(function() {
-        var overlay = document.getElementById('popup-overlay');
-        overlay.classList.add('an-active');           // display:flex
-        requestAnimationFrame(function() {
-            requestAnimationFrame(function() {
-                overlay.classList.add('an-visible');  // opacity:1 via CSS transition
-            });
-        });
-    }, 1800);
 
     function submitPopup(e) {
         e.preventDefault();
@@ -5078,7 +5076,7 @@
         if (this.value.length === 2) document.getElementById('pop-yyyy').focus();
     });
 
-    // Close popup when clicking the dark backdrop (outside the card)
+    // Close popup on overlay click (outside card)
     document.getElementById('popup-overlay').addEventListener('click', function(e) {
         if (e.target === this) closePopup();
     });
@@ -5314,16 +5312,12 @@
         if (!content) return;
         document.getElementById('im-title').textContent = content.title;
         document.getElementById('im-body').innerHTML = content.html;
-        var io = document.getElementById('info-modal-overlay');
-        io.style.display = 'flex';
-        requestAnimationFrame(function() { io.classList.add('open'); });
+        document.getElementById('info-modal-overlay').classList.add('open');
         document.body.style.overflow = 'hidden';
     }
 
     function closeInfoModal() {
-        var io = document.getElementById('info-modal-overlay');
-        io.classList.remove('open');
-        setTimeout(function() { io.style.display = 'none'; }, 360);
+        document.getElementById('info-modal-overlay').classList.remove('open');
         document.body.style.overflow = '';
     }
 
@@ -5388,6 +5382,82 @@
     </div>
 </div>
 
+<!-- ══════════════════ COPYRIGHT PROTECTION ══════════════════ -->
+<script>
+(function() {
+
+    // 1. Disable right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+    });
+
+    // 2. Disable image dragging
+    document.addEventListener('dragstart', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // 3. Block keyboard shortcuts: Ctrl/Cmd + C, S, U, P, A, Shift+I (devtools), F12
+    document.addEventListener('keydown', function(e) {
+        const ctrl = e.ctrlKey || e.metaKey;
+
+        // Block Ctrl+C (copy), Ctrl+S (save), Ctrl+U (view source),
+        // Ctrl+P (print), Ctrl+A (select all), Ctrl+Shift+I (DevTools),
+        // Ctrl+Shift+J, Ctrl+Shift+C, F12
+        if (ctrl && ['c','s','u','p','a'].includes(e.key.toLowerCase())) {
+            // Allow copy/cut/paste inside input fields and textareas
+            const tag = document.activeElement.tagName.toLowerCase();
+            if (tag === 'input' || tag === 'textarea') return;
+            e.preventDefault();
+            return false;
+        }
+        if (ctrl && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) {
+            e.preventDefault();
+            return false;
+        }
+        if (e.key === 'F12') {
+            e.preventDefault();
+            return false;
+        }
+        // PrintScreen
+        if (e.key === 'PrintScreen') {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // 4. Block copy/cut events globally (except in form fields)
+    document.addEventListener('copy', function(e) {
+        const tag = document.activeElement.tagName.toLowerCase();
+        if (tag === 'input' || tag === 'textarea') return;
+        e.preventDefault();
+        return false;
+    });
+
+    document.addEventListener('cut', function(e) {
+        const tag = document.activeElement.tagName.toLowerCase();
+        if (tag === 'input' || tag === 'textarea') return;
+        e.preventDefault();
+        return false;
+    });
+
+    // 5. Disable long-press save on mobile (image touch-hold)
+    document.addEventListener('touchstart', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    // 6. Add © watermark to console as a deterrent
+    const y = new Date().getFullYear();
+    console.log('%c© ' + y + ' Aura Nouvelle. All Rights Reserved.\nUnauthorised copying or reproduction of any content on this site is strictly prohibited.',
+        'color:#B22222;font-size:14px;font-weight:bold;font-family:serif;');
+
+})();
+</script>
 
 </body>
 </html>

@@ -60,34 +60,6 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* ── COPYRIGHT PROTECTION ── */
-        body, body * {
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        /* Allow selection inside form inputs so users can type normally */
-        input, textarea, select {
-            -webkit-user-select: text !important;
-            -moz-user-select: text !important;
-            -ms-user-select: text !important;
-            user-select: text !important;
-        }
-        img {
-            -webkit-user-drag: none !important;
-            user-drag: none !important;
-            pointer-events: none;
-        }
-        /* Re-enable pointer events on interactive elements */
-        a, button, input, textarea, select, label,
-        .lk-carousel, .lk-arrow, .lk-dot, .lk-cart-btn,
-        .wa-float, .nav-link, .cart-icon-wrap, .navbar,
-        .co-input, .pay-option, .place-order-btn,
-        .faq-item, .im-faq-head, [onclick] {
-            pointer-events: auto !important;
-        }
-
         /* scroll-behavior managed per-call via JS, not globally */
 
         body {
@@ -5382,82 +5354,6 @@
     </div>
 </div>
 
-<!-- ══════════════════ COPYRIGHT PROTECTION ══════════════════ -->
-<script>
-(function() {
-
-    // 1. Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        return false;
-    });
-
-    // 2. Disable image dragging
-    document.addEventListener('dragstart', function(e) {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
-            return false;
-        }
-    });
-
-    // 3. Block keyboard shortcuts: Ctrl/Cmd + C, S, U, P, A, Shift+I (devtools), F12
-    document.addEventListener('keydown', function(e) {
-        const ctrl = e.ctrlKey || e.metaKey;
-
-        // Block Ctrl+C (copy), Ctrl+S (save), Ctrl+U (view source),
-        // Ctrl+P (print), Ctrl+A (select all), Ctrl+Shift+I (DevTools),
-        // Ctrl+Shift+J, Ctrl+Shift+C, F12
-        if (ctrl && ['c','s','u','p','a'].includes(e.key.toLowerCase())) {
-            // Allow copy/cut/paste inside input fields and textareas
-            const tag = document.activeElement.tagName.toLowerCase();
-            if (tag === 'input' || tag === 'textarea') return;
-            e.preventDefault();
-            return false;
-        }
-        if (ctrl && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) {
-            e.preventDefault();
-            return false;
-        }
-        if (e.key === 'F12') {
-            e.preventDefault();
-            return false;
-        }
-        // PrintScreen
-        if (e.key === 'PrintScreen') {
-            e.preventDefault();
-            return false;
-        }
-    });
-
-    // 4. Block copy/cut events globally (except in form fields)
-    document.addEventListener('copy', function(e) {
-        const tag = document.activeElement.tagName.toLowerCase();
-        if (tag === 'input' || tag === 'textarea') return;
-        e.preventDefault();
-        return false;
-    });
-
-    document.addEventListener('cut', function(e) {
-        const tag = document.activeElement.tagName.toLowerCase();
-        if (tag === 'input' || tag === 'textarea') return;
-        e.preventDefault();
-        return false;
-    });
-
-    // 5. Disable long-press save on mobile (image touch-hold)
-    document.addEventListener('touchstart', function(e) {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
-        }
-    }, { passive: false });
-
-    // 6. Add © watermark to console as a deterrent
-    const y = new Date().getFullYear();
-    console.log('%c© ' + y + ' Aura Nouvelle. All Rights Reserved.\nUnauthorised copying or reproduction of any content on this site is strictly prohibited.',
-        'color:#B22222;font-size:14px;font-weight:bold;font-family:serif;');
-
-})();
-</script>
 
 </body>
 </html>

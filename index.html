@@ -74,10 +74,11 @@
             -ms-user-select: text !important;
             user-select: text !important;
         }
-        /* Prevent image dragging via CSS (JS also handles this) */
+        /* Prevent image dragging + iOS long-press "Save Image" popup */
         img {
             -webkit-user-drag: none;
             user-drag: none;
+            -webkit-touch-callout: none;
         }
 
         /* scroll-behavior managed per-call via JS, not globally */
@@ -5436,12 +5437,8 @@
         return false;
     });
 
-    // 5. Disable long-press save on mobile via CSS touch-action (JS preventDefault on
-    //    touchstart blocks click events on mobile, so we avoid it here)
-    document.querySelectorAll('img').forEach(function(img) {
-        img.addEventListener('touchstart', function(e) { e.preventDefault(); }, { passive: false });
-        img.style.webkitTouchCallout = 'none';
-    });
+    // 5. iOS long-press "Save Image" is blocked via CSS -webkit-touch-callout: none
+    //    (We do NOT call preventDefault on touchstart — that would break carousel swiping)
 
     // 6. Add © watermark to console as a deterrent
     const y = new Date().getFullYear();

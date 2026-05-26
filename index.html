@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Aura Nouvelle v2.1 -->
+<!-- Aura Nouvelle v2.2 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1376,16 +1376,16 @@
             background: rgba(10,5,5,0.7);
             backdrop-filter: blur(5px);
             z-index: 9998;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             padding: 20px;
             opacity: 0;
-            pointer-events: none;
             transition: opacity 0.3s;
         }
 
         #restock-overlay.open {
+            display: flex;
             opacity: 1;
             pointer-events: all;
         }
@@ -1559,13 +1559,13 @@
             background: rgba(10,5,5,0.92);
             backdrop-filter: blur(8px);
             z-index: 10000;
-            display: flex; flex-direction: column;
+            display: none; flex-direction: column;
             align-items: center; justify-content: flex-start;
             padding: 120px 40px 40px;
-            opacity: 0; pointer-events: none;
+            opacity: 0;
             transition: opacity 0.3s;
         }
-        #search-overlay.open { opacity: 1; pointer-events: all; }
+        #search-overlay.open { display: flex; opacity: 1; pointer-events: all; }
         .search-close-btn {
             position: absolute; top: 36px; right: 44px;
             background: none; border: none;
@@ -1650,10 +1650,10 @@
         #cart-backdrop {
             position: fixed; inset: 0;
             background: rgba(0,0,0,0.45);
-            z-index: 9996; opacity: 0; pointer-events: none;
+            z-index: 9996; display: none; opacity: 0;
             transition: opacity 0.3s;
         }
-        #cart-backdrop.open { opacity: 1; pointer-events: all; }
+        #cart-backdrop.open { display: block; opacity: 1; pointer-events: all; }
         .cart-header {
             padding: 24px 28px; border-bottom: 1px solid #f0ece6;
             display: flex; justify-content: space-between; align-items: center;
@@ -1777,11 +1777,11 @@
         #checkout-overlay {
             position: fixed; inset: 0;
             background: rgba(10,5,5,0.7); backdrop-filter: blur(5px);
-            z-index: 9998; display: flex;
+            z-index: 9998; display: none;
             align-items: center; justify-content: center; padding: 20px;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s;
+            opacity: 0; transition: opacity 0.3s;
         }
-        #checkout-overlay.open { opacity: 1; pointer-events: all; }
+        #checkout-overlay.open { display: flex; opacity: 1; pointer-events: all; }
         #checkout-card {
             background: white; width: 100%; max-width: 520px;
             max-height: 90vh; overflow-y: auto;
@@ -2487,16 +2487,15 @@
             inset: 0;
             background: rgba(17,17,17,0.78);
             z-index: 9990;
-            display: flex;
+            display: none;
             align-items: flex-start;
             justify-content: center;
             opacity: 0;
-            pointer-events: none;
             transition: opacity 0.35s;
             padding: 60px 20px 20px;
             overflow-y: auto;
         }
-        #info-modal-overlay.open { opacity: 1; pointer-events: all; }
+        #info-modal-overlay.open { display: flex; opacity: 1; pointer-events: all; }
         #info-modal-box {
             background: var(--white);
             width: 100%;
@@ -4427,12 +4426,16 @@
     // SEARCH
     // ══════════════════════════════════════════
     function openSearch() {
-        document.getElementById('search-overlay').classList.add('open');
+        var so = document.getElementById('search-overlay');
+        so.style.display = 'flex';
+        requestAnimationFrame(function() { so.classList.add('open'); });
         document.body.style.overflow = 'hidden';
-        setTimeout(() => document.getElementById('search-input').focus(), 100);
+        setTimeout(function() { document.getElementById('search-input').focus(); }, 100);
     }
     function closeSearch() {
-        document.getElementById('search-overlay').classList.remove('open');
+        var so = document.getElementById('search-overlay');
+        so.classList.remove('open');
+        setTimeout(function() { so.style.display = 'none'; }, 310);
         document.body.style.overflow = '';
         document.getElementById('search-input').value = '';
         document.getElementById('searchResults').innerHTML = '<p class="search-hint">Start typing to search the collection…</p>';
@@ -4559,13 +4562,21 @@
         const panel = document.getElementById('cart-panel');
         const backdrop = document.getElementById('cart-backdrop');
         const isOpen = panel.classList.toggle('open');
-        backdrop.classList.toggle('open', isOpen);
+        if (isOpen) {
+            backdrop.style.display = 'block';
+            requestAnimationFrame(function() { backdrop.classList.add('open'); });
+        } else {
+            backdrop.classList.remove('open');
+            setTimeout(function() { backdrop.style.display = 'none'; }, 310);
+        }
         document.body.style.overflow = isOpen ? 'hidden' : '';
     }
 
     function closeCart() {
         document.getElementById('cart-panel').classList.remove('open');
-        document.getElementById('cart-backdrop').classList.remove('open');
+        var backdrop = document.getElementById('cart-backdrop');
+        backdrop.classList.remove('open');
+        setTimeout(function() { backdrop.style.display = 'none'; }, 310);
         document.body.style.overflow = '';
     }
 
@@ -4607,13 +4618,17 @@
         (disc > 0 ? `<div class="checkout-order-item" style="color:#27ae60"><span>Gift Card (${appliedGCCode})</span><span>− GHS ${disc.toLocaleString()}</span></div>` : '') +
         `<div class="checkout-order-total"><span>Total</span><span>GHS ${final.toLocaleString()}</span></div>`;
         closeCart();
-        document.getElementById('checkout-overlay').classList.add('open');
+        var co = document.getElementById('checkout-overlay');
+        co.style.display = 'flex';
+        requestAnimationFrame(function() { co.classList.add('open'); });
         document.body.style.overflow = 'hidden';
         updatePayNowAmount();
     }
 
     function closeCheckout() {
-        document.getElementById('checkout-overlay').classList.remove('open');
+        var co = document.getElementById('checkout-overlay');
+        co.classList.remove('open');
+        setTimeout(function() { co.style.display = 'none'; }, 310);
         document.body.style.overflow = '';
         // Reset to form view
         const form = document.querySelector('#checkout-card .checkout-body:not(#order-confirmation)');
@@ -4927,12 +4942,16 @@
         document.getElementById('restock-contact').value = '';
         // Clear size selection
         document.querySelectorAll('.restock-size-btn').forEach(b => b.classList.remove('selected'));
-        document.getElementById('restock-overlay').classList.add('open');
+        var ro = document.getElementById('restock-overlay');
+        ro.style.display = 'flex';
+        requestAnimationFrame(function() { ro.classList.add('open'); });
         document.body.style.overflow = 'hidden';
     }
 
     function closeRestock() {
-        document.getElementById('restock-overlay').classList.remove('open');
+        var ro = document.getElementById('restock-overlay');
+        ro.classList.remove('open');
+        setTimeout(function() { ro.style.display = 'none'; }, 310);
         document.body.style.overflow = '';
         // Reset screens for next open
         setTimeout(() => {
@@ -5295,12 +5314,16 @@
         if (!content) return;
         document.getElementById('im-title').textContent = content.title;
         document.getElementById('im-body').innerHTML = content.html;
-        document.getElementById('info-modal-overlay').classList.add('open');
+        var io = document.getElementById('info-modal-overlay');
+        io.style.display = 'flex';
+        requestAnimationFrame(function() { io.classList.add('open'); });
         document.body.style.overflow = 'hidden';
     }
 
     function closeInfoModal() {
-        document.getElementById('info-modal-overlay').classList.remove('open');
+        var io = document.getElementById('info-modal-overlay');
+        io.classList.remove('open');
+        setTimeout(function() { io.style.display = 'none'; }, 360);
         document.body.style.overflow = '';
     }
 

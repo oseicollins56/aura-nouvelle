@@ -2163,27 +2163,18 @@
             background: rgba(10,5,5,0.72);
             backdrop-filter: blur(6px);
             z-index: 9999;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             padding: 20px;
             opacity: 0;
-            pointer-events: none;
-            animation: popOverlayIn 0.5s 1.8s forwards;
+            transition: opacity 0.45s ease;
         }
-
-        #popup-overlay.visible {
+        #popup-overlay.an-active {
+            display: flex;
+        }
+        #popup-overlay.an-visible {
             opacity: 1;
-            pointer-events: auto;
-        }
-
-        #popup-overlay.hidden {
-            display: none !important;
-            pointer-events: none;
-        }
-
-        @keyframes popOverlayIn {
-            to { opacity: 1; }
         }
 
         #popup-card {
@@ -5034,25 +5025,22 @@
     // ── POPUP LOGIC ──
     function closePopup() {
         const overlay = document.getElementById('popup-overlay');
-        // Cancel the CSS animation first — otherwise 'forwards' fill keeps opacity:1
-        // and overrides any inline opacity change
-        overlay.style.animation = 'none';
-        overlay.style.pointerEvents = 'none';
-        overlay.style.transition = 'opacity 0.35s ease';
-        overlay.style.opacity = '0';
-        setTimeout(() => {
-            overlay.classList.add('hidden');
-            overlay.classList.remove('visible');
-        }, 360);
+        overlay.classList.remove('an-visible');
+        setTimeout(function() {
+            overlay.classList.remove('an-active');
+        }, 460);
     }
 
-    // Enable pointer events only after the popup has fully animated in (1.8s delay + 0.5s anim)
+    // Show popup after 1.8s — display:none by default so it NEVER blocks clicks
     setTimeout(function() {
-        const overlay = document.getElementById('popup-overlay');
-        if (!overlay.classList.contains('hidden')) {
-            overlay.classList.add('visible');
-        }
-    }, 2400);
+        var overlay = document.getElementById('popup-overlay');
+        overlay.classList.add('an-active');           // display:flex
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                overlay.classList.add('an-visible');  // opacity:1 via CSS transition
+            });
+        });
+    }, 1800);
 
     function submitPopup(e) {
         e.preventDefault();
@@ -5091,7 +5079,7 @@
         if (this.value.length === 2) document.getElementById('pop-yyyy').focus();
     });
 
-    // Close popup on overlay click (outside card)
+    // Close popup when clicking the dark backdrop (outside the card)
     document.getElementById('popup-overlay').addEventListener('click', function(e) {
         if (e.target === this) closePopup();
     });
